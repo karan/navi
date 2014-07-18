@@ -1,3 +1,4 @@
 function CodeViewModel() {
-	var show = new ko.observable(false);
+	var self = this;
+	self.header = new ko.observable('Code Page');
 }

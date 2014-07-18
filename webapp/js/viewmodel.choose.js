@@ -1,5 +1,4 @@
 function ChooseViewModel() {
-	var show = new ko.observable(false);
-
-
+	var self = this;
+	self.header = new ko.observable('Choose Page');
 }

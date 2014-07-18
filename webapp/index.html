@@ -13,6 +13,7 @@
 
 		<!-- Models -->
 		<script type="text/javascript" src="js/model.screentype.js"></script>
+		<script type="text/javascript" src="js/model.firepad.js"></script>
 		<script type="text/javascript" src="js/model.tester.js"></script>
 
 		<!-- View Models -->
@@ -25,19 +26,17 @@
 		<div id="app">
 			<!-- CODING SCREEN -->
 			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code">
-				<div id="code-internal">
-					<p> On code screen </p>
-				</div>
+				<h1 data-bind="text: header"></h1>
 			</div>
 
 			<!-- CHOOSE SCREEN -->
 			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose">
-				<p> On choose screen </p>
+				<h1 data-bind="text: header"></h1>
 			</div>
 
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login">
-				<p> On login screen </p>
+				<h1 data-bind="text: header"></h1>
 			</div>
 		</div>
 		<!-- Init -->

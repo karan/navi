@@ -1,5 +1,4 @@
 function LoginViewModel() {
-	var show = new ko.observable(false);
-
-
+	var self = this;
+	self.header = new ko.observable('Login Page');
 }
