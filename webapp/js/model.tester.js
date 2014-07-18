@@ -1,6 +1,15 @@
 function Tester() {
 	var self = this;
-	self.testCode = function(code) {
+
+	self.setTest = function(test) {
+
+	};
+
+	self.run = function() {
+		return new TestResult();
+	};
+
+	self.setUserCode = function(code) {
 
 	};
 }
