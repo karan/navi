@@ -41,6 +41,7 @@ function ChooseViewModel() {
 	};
 
 	self.onClickProfile = function() {
+		cursor.stop();
 		app.setScreen(SCREEN_TYPE.PROFILE);
 	};
 }

@@ -59,7 +59,7 @@ body {
 .center-title {
 	width: 100%;
 	text-align: center;
-	margin-top: 200px
+	margin-top: 130px
 }
 
 .choice-buttons {
@@ -107,6 +107,7 @@ body {
 	float: right;
 	width: 50px;
 	height: 50px;
+	position: relative;
 }
 
 .top-profile img {
@@ -116,5 +117,25 @@ body {
 
 
 .top-profile:hover {
+	cursor: pointer;
+}
+
+.overlay {
+    opacity: .4;
+    background-color: black;
+    position: absolute;
+    left: 0; top: 0; height: 50px; width: 50px;
+}
+
+.back-button-top {
+	background: url('../img/back.png') center no-repeat;
+	width: 50px;
+	height: 50px;
+	float: right;
+	margin-right: 20px;
+	display: block;
+}
+
+.back-button-top:hover {
 	cursor: pointer;
 }
