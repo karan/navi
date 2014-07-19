@@ -34,10 +34,20 @@ function CodeViewModel() {
 
 	self.currentProblem = new ko.observable();
 	self.tester = new Tester();
+	self.runningTests = new ko.observable(true);
 
-	self.runTests = function() {
+	self.onRunTestsClick = function() {
+		app.getSocket().emit(runTests);
+		self.runTester();
+	};
+
+	self.runTester = function() {
 		self.tester.setUserCode(firePad.getCode());
-		self.tester.run(self.finishedProblem);
+		self.tester.run(function(allPassed) {
+			if (allPassed) {
+				self.finishedProblem();
+			}
+		});
 	};
 
 	self.finishedProblem = function() {
@@ -75,8 +85,18 @@ function CodeViewModel() {
 		}
 	};
 
+	self.onConnectedToSocket = function() {
+		app.getSocket().on('runTests', self.onRunTests);
+	};
+
+
+	self.onRunTests = function() {
+		console.log("RUNNING TESTS FROM OTHER");
+		self.runTests();
+	};
+
 	self.sendMessage = function(model, event) {
 		self.fireChat.sendMessage(event.currentTarget.value);
 		event.currentTarget.value = '';
-	}
+	};
 }

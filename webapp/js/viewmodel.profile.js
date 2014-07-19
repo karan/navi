@@ -18,4 +18,8 @@ function ProfileViewModel() {
 		cursor.start()
 		done();
 	};
+
+	self.onConnectedToSocket = function() {
+
+	};
 }

@@ -28,7 +28,7 @@ function Tester() {
 		self.tests([]);
 	};
 
-	self.run = function(passHandle) {
+	self.run = function(callback) {
 		if (self.tests() && code) {
 			var allPassed = true;
 			for(var i = 0; i < self.tests().length; i++) {
@@ -44,8 +44,8 @@ function Tester() {
 				allPassed = allPassed && pass;
 				self.tests()[i].fails(!pass);
 			}
-			if (allPassed && passHandler) {
-				passHandler();
+			if (callback) {
+				callback(allPassed);
 			}
 		}
 	};

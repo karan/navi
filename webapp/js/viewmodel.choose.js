@@ -14,16 +14,24 @@ function ChooseViewModel() {
 		}
 	};
 
+	self.onConnectedToSocket = function() {
+	   app.getSocket().on('connectToGame', self.onConnectedToGameSession);
+	};
+
+	self.onConnectedToGameSession = function(game) {
+	    console.log("I'm the other client " + socket);
+	    console.log("connecting to game session ");
+	    console.log(game);
+	    app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'game' : game});
+	};
+
 	self.onClickRandom = function() {
 		cursor.stop();
 		self.isShowingChoices(false);
 		self.title.write('Searching...', 50);
 		facebook.connectToRandom(function(game) {
-			
-			socket.emit('sessionConnected', game);
-
 			self.title.write('Found! Loading...', 50);
-			app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'game' : game});
+			socket.emit('sessionConnected', game, MODE.RANDOM);
 		});
 	};
 
@@ -32,10 +40,8 @@ function ChooseViewModel() {
 		self.title.write('Checking friends online now...', 50);
 		facebook.connectToFriend(function(game) {
 			if(game) {
-				socket.emit('sessionConnected', game);
-
 				self.title.write('Found! Loading...', 50);
-				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
+				socket.emit('sessionConnected', game, MODE.FRIENDS);
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {
 					cursor.stop();
@@ -45,8 +51,11 @@ function ChooseViewModel() {
 		});
 	};
 
+
 	self.onClickProfile = function() {
 		cursor.stop();
 		app.setScreen(SCREEN_TYPE.PROFILE);
 	};
+
+
 }

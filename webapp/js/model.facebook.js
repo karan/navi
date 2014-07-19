@@ -4,6 +4,7 @@ function Facebook() {
   self.connectToFriend = function(callback) {
     // See README.md
     $.getJSON("/start?option=friend", function(data) {
+      socket.emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
@@ -11,6 +12,7 @@ function Facebook() {
   self.connectToRandom = function(callback) {
     // See README.md
     $.getJSON("/start?option=all", function(data) {
+      socket.emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
@@ -20,7 +22,7 @@ function Facebook() {
     $.post("/finalize_session", {
         user_solution: user_solution, score: score, problem_session: problem_session
       }, function(data) {
-        // data == 'ok' if everything was fine, empty otherwise
+        socket.emit('endSession');
         callback(data);
       });
   }

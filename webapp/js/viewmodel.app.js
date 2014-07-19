@@ -1,6 +1,8 @@
-function AppViewModel(facebookUser) {
+function AppViewModel(facebookUser, init) {
 	var self = this;
 	var user = facebookUser;
+	var socket = io();
+	socket.on('connect', self.onConnectedToSocket);
 
 	self.VM = {
 		code : new CodeViewModel(),
@@ -38,6 +40,10 @@ function AppViewModel(facebookUser) {
 		return user;
 	};
 
+	self.getSocket = function() {
+		return socket;
+	};
+
 	self.getProfilePictureSrc = function() {
 		if(self.isAuthenticated()) {
 			return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large';
@@ -59,6 +65,14 @@ function AppViewModel(facebookUser) {
 
 	self.isProfileVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.PROFILE;
+	};
+
+	self.onConnectedToSocket = function() {
+		self.VM.code.onConnectedToSocket();
+		self.VM.login.onConnectedToSocket();
+		self.VM.choose.onConnectedToSocket();
+		self.VM.profile.onConnectedToSocket();
+		init(self);
 	};
 
 	self.setScreen = function(screen, optData) {

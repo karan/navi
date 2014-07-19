@@ -28,4 +28,8 @@ function LoginViewModel() {
 		wordInterval = setInterval(changeText, 2000);
 		done();
 	};
+
+	self.onConnectedToSocket = function() {
+
+	};
 }
