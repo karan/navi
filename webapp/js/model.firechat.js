@@ -20,8 +20,8 @@ function FireChat(info, callbackVM) {
 
   var simpleLogin = new FirebaseSimpleLogin(ref, function(err, user) {
     if (user) {
-      firechat.setUser(user.id, app.getUser().name, function(user) {
-        firechat.enterRoom('-JSHsoW-JQQbvFcB0zJX');
+      self.firechat.setUser(user.id, app.getUser().name, function(user) {
+        self.firechat.enterRoom('-JSHsoW-JQQbvFcB0zJX');
         // if (info.game.users[0].fbId === app.getUser().fbId) {
         //   firechat.createRoom('room', 'public', function(roomId) {
         //     self.roomId = roomId;
@@ -38,7 +38,8 @@ function FireChat(info, callbackVM) {
   });
 
   self.sendMessage = function(message) {
-    self.firechat.sendMessage(self.roomId, message);
+    // TODO: change to self.roomId
+    self.firechat.sendMessage('-JSHsoW-JQQbvFcB0zJX', message);
   };
 
   callbackVM();
