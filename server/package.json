@@ -14,7 +14,6 @@
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
     "redis": "^0.11.0",
-    "request": "^2.37.0",
-    "aws-sdk": "^2.0.8"
+    "request": "^2.37.0"
   }
 }
