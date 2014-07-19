@@ -9,7 +9,7 @@
 }
 
 body {
-	background: #2a2c2b;
+	background: #2a2c2b url('../img/bg.png');
 	margin: 0;
 	padding: 0;
 	color: #bdc3c7;
