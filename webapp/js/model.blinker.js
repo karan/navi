@@ -12,7 +12,7 @@ function Blinker(domId, time) {
 	};
 
 	self.start = function() {
-		blinkInterval = setInterval(blinkCursor, 500);
+		blinkInterval = setInterval(blinkCursor, time);
 	};
 
 	self.stop = function() {
