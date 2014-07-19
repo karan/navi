@@ -18,14 +18,14 @@ html, body {
 #chat {
   width: 33.33%;
   height: 92%;
-  background-color: #1a252f;
+  background-color: #272C3D;
   float: left;
 }
 
 #navi-header {
   height: 44px;
   width: 100%;
-  background-color: green;
+  background-color: #0d0e0f;
 }
 
 #code-bottom-bar {
@@ -38,7 +38,7 @@ html, body {
 #code-tests {
   width: 66.67%;
   height: 100%;
-  background-color: blue;
+  background-color: #0d0e0f;
   float: left;
 }
 

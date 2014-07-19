@@ -5,7 +5,7 @@ function FirePad(callbackVM) {
 
 	var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
 		lineNumbers: true,
-		theme: 'light-table',
+		theme: 'tomorrow-night',
 		mode: 'javascript'
 	});
 

@@ -8,12 +8,15 @@ body {
 	background: #2a2c2b;
 	margin: 0;
 	padding: 0;
-	font-family: "Courier New", Courier, monospace;
 	color: #bdc3c7;
 }
 
 .purple {
 	color: #b280c7;
+}
+
+.console-text {
+	font-family: "Courier New", Courier, monospace;
 }
 
 .center-logo {
@@ -58,6 +61,7 @@ body {
 .choice-buttons {
 	width: 100%;
 	text-align: center;
+<<<<<<< HEAD
 	height: 50px;
 }
 
@@ -86,3 +90,6 @@ body {
 	background: #b280c7;
 	color: #2a2c2b;
 }
+=======
+}
+>>>>>>> 643ea7757f785584f34beaaa3e300777e0105f8e

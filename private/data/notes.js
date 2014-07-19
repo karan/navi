@@ -13,13 +13,13 @@ function sum (n) {
 }
 /////////////////////////////
 function sum (n) {
-  var sum = 0;
+  var total = 0;
   for (var i = 0; i < n; ++i) {
     if (i % 3 === 0 || i % 5 === 0) {
-      sum += i;
+      total += i;
     }
   }
-  return sum;
+  return total;
 }
 /////////////////////////////
 // sum(0) === 0
@@ -44,9 +44,90 @@ function sum (n) {
  */
 
 function reverse (string) {
-  return 'hi';
-}
-/////////////////////////////
-function reverse (argument) {
   // body...
 }
+/////////////////////////////
+function reverse (string) {
+  return string.split(' ').reverse().join(' ');
+}
+/////////////////////////////
+// reverse('hi') === 'hi'
+// reverse('') === ''
+// reverse('a b c') === 'c b a'
+// reverse('123') === '123'
+// reverse('what is love') === 'love is what'
+// reverse('aweg.ge. rgek gre') === 'gre rgek aweg.ge.'
+/////////////////////////////
+
+/////////////////////////////
+// Is Fibo
+/////////////////////////////
+/**
+ * You are given an integer, n. Find out if the number is an element of fibonacci series.
+ *
+ * The first few elements of fibonacci series are 0,1,1,2,3,5,8,13....
+ * A fibonacci series is one where every element is a sum of the previous two elements in the series.
+ * The first two elements are 0 and 1.
+ */
+function isFibo (n) {
+  // body...
+}
+/////////////////////////////
+// A utility function that returns true if x is perfect square
+function isPerfectSquare (x) {
+  var s = Math.floor(Math.sqrt(x));
+  return (s * s === x);
+}
+// Returns true if n is a Fibinacci Number, else false
+function isFibo (n) {
+  // n is Fibinacci if one of 5*n*n + 4 or 5*n*n - 4 or both
+  // is a perferct square
+  return isPerfectSquare(5*n*n + 4) || isPerfectSquare(5*n*n - 4);
+}
+/////////////////////////////
+// isFibo(0) === true
+// isFibo(1) === true
+// isFibo(2) === true
+// isFibo(3) === true
+// isFibo(4) === false
+// isFibo(5) === true
+// isFibo(6) === false
+// isFibo(7) === false
+// isFibo(8) === true
+// isFibo(9) === false
+// isFibo(89) === true
+// isFibo(90) === true
+/////////////////////////////
+
+/////////////////////////////
+// Manhattan Distance
+/////////////////////////////
+/**
+ * The Manhattan Distance between two points is defined to be the sum of the horizontal
+ * and vertical distances between two points. For example:
+ *
+ *  _ _ _o
+ * |
+ * |
+ * |
+ * o
+ *
+ * The distance between the two points above located at (0, 3) and (3, 0) is 6.
+ * manhattanDistance({ x: 0, y: 3}, { x: 3, y: 0 }) === 6
+ *
+ * Create a function that finds the manhattan distance between two points.
+ */
+function manhattanDistance (p1, p2) {
+  // body...
+}
+/////////////////////////////
+function manhattanDistance (p1, p2) {
+  return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+}
+/////////////////////////////
+// manhattanDistance({ x: 0, y: 3}, { x: 3, y: 0 }) === 6
+// manhattanDistance({ x: 0, y: 0}, { x: 3, y: 0 }) === 3
+// manhattanDistance({ x: -6, y: 3}, { x: 3, y: 9 }) === 12
+// manhattanDistance({ x: 1, y: 1}, { x: 1, y: 1 }) === 0
+// manhattanDistance({ x: 100, y: 3}, { x: 3, y: 0 }) === 100
+/////////////////////////////
