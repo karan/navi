@@ -40,8 +40,14 @@ User:
 
 Returns logged in user (see JSON above)
 
-#### Get the next random problem
+#### Start a new session
 
-`/next_problem`
+`/start?option={ friends | all }`
 
-JSON includes, the `problem` and a list of `tests` where `input` has the test code and `solution` has the expected output.
+Returns:
+
+{
+  'problem': randProblem,  // {problem: 'abc', tests: [ {input:'', output: ''} ]}
+  'users': [req.user, thisFriend],  // user objects
+  'problemsession': newPS._id  // a UUID
+}

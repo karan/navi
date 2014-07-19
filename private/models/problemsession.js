@@ -12,8 +12,8 @@ var problemSessionSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  problem: String,
-  user1: String,
+  problem: String,  // object id of problem
+  user1: String,  // object id of user
   user2: String
 });
 
