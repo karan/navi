@@ -158,8 +158,8 @@ exports.finalizeSession = function(req, res) {
           user1.save(function(err, u) {
             user2.save(function(err, u) {
               res.send(200, 'ok')
-            })
-          })
+            });
+          });
         });
       });
     });
