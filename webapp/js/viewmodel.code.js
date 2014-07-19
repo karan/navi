@@ -104,7 +104,7 @@ function CodeViewModel() {
 
 	self.onRunTests = function() {
 		console.log("RUNNING TESTS FROM OTHER");
-		self.runTests();
+		self.runTester();
 	};
 
 	self.sendMessage = function(model, event) {
