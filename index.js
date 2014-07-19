@@ -88,17 +88,15 @@ io.sockets.on('connection', function (socket) {
     ProblemSession.findById(game.problemsession, function(err, ps) {
       if (!ps.connected) {
         console.log("emit to other client");
-        io.sockets.in(ps.user1).emit('connectToGame', game, mode);
-        setTimeout(function() {
-          io.sockets.in(ps.user2).emit('connectToGame', game, mode);
-        }, 500);
+        // io.sockets.in(ps.user1).emit('connectToGame', game, mode);
+        io.sockets.in(ps.user2).emit('connectToGame', game, mode);
       }
     });
   });
 
   socket.on('disconnect', function () {
     var userData = socket.user;
-    console.log("disconnect " + userData._id);
+    console.log("disconnect " + userData);
     if (userData) {
       routes.setOnline(userData._id, false);
     }
