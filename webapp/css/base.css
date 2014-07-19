@@ -37,3 +37,7 @@ body {
 	width: 20px;
 	text-align: center;
 }
+
+#code, #choose, #login {
+	display: none;
+}
