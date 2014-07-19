@@ -19,6 +19,7 @@ function ChooseViewModel() {
 	};
 
 	self.onConnectedToGameSession = function(game) {
+		console.log("CONNECTED TO GAME SESSION");
 	    console.log("I'm the other client " + socket);
 	    console.log("connecting to game session ");
 	    console.log(game);
@@ -31,6 +32,7 @@ function ChooseViewModel() {
 		self.title.write('Searching...', 50);
 		facebook.connectToRandom(function(game) {
 			self.title.write('Found! Loading...', 50);
+			console.log("EMITTING SESSION CONNECT...");
 			socket.emit('sessionConnected', game, MODE.RANDOM);
 		});
 	};
@@ -41,6 +43,7 @@ function ChooseViewModel() {
 		facebook.connectToFriend(function(game) {
 			if(game) {
 				self.title.write('Found! Loading...', 50);
+				console.log("EMITTING SESSION CONNECT...");
 				socket.emit('sessionConnected', game, MODE.FRIENDS);
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {

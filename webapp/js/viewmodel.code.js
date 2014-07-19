@@ -37,13 +37,18 @@ function CodeViewModel() {
 	self.runningTests = new ko.observable(true);
 
 	self.onRunTestsClick = function() {
-		app.getSocket().emit(runTests);
-		self.runTester();
+		if(!self.runningTests()) {
+			console.log("EMITTING RUN TESTS");
+			app.getSocket().emit('runTests');
+			self.runningTests(true);
+			self.runTester();
+		}
 	};
 
 	self.runTester = function() {
 		self.tester.setUserCode(firePad.getCode());
 		self.tester.run(function(allPassed) {
+			self.runningTests(false);
 			if (allPassed) {
 				self.finishedProblem();
 			}
