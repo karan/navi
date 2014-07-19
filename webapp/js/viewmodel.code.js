@@ -80,12 +80,12 @@ function CodeViewModel() {
 		game = info.game;
 		if (roomId && game) {
 			if (info.type == MODE.FRIENDS) {
-				setUpFriend(info.game, function(problem) {
+				setUpFriend(function(problem) {
 					setUpFirePad(done, problem);
 					setUpFireChat(done, info);
 				});
 			} else if (info.type == MODE.RANDOM) {
-				setUpRandom(info.game, function(problem) {
+				setUpRandom(function(problem) {
 					setUpFirePad(done, problem);
 					setUpFireChat(done, info);
 				});
