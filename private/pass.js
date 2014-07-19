@@ -8,7 +8,6 @@ var Constants = require('./constants');
 
 // bring in the schema for user
 var User = require('mongoose').model('User');
-var Thing = require('mongoose').model('Thing');
 var request = require('request');
 
 module.exports = function (passport) {
@@ -39,7 +38,8 @@ module.exports = function (passport) {
   passport.use(new FacebookStrategy({
     clientID: Constants.Facebook.APPID,
     clientSecret: Constants.Facebook.SECRET,
-    callbackURL: Constants.Facebook.CALLBACK
+    callbackURL: Constants.Facebook.CALLBACK,
+    profileFields: ['id', 'displayName', 'photos', 'emails']
   },
   function(token, tokenSecret, profile, done) {
     console.log(profile);
@@ -51,19 +51,15 @@ module.exports = function (passport) {
         if (err) return done(err);
 
         new User({
-          linkedinId: profile.id,
+          fbId: profile.id,
           accessToken: token,
           accessTokenSecret: tokenSecret,
           email: profile.emails[0].value,
           name: profile.displayName,
-          photo: profile._json.pictureUrl,
+          photo: profile.photos[0].value,
           username: profile.emails[0].value.split('@')[0],
-          levels: {
-            en: { scores: 0, level: 1 },
-            es: { scores: 0, level: 1 },
-            zh: { scores: 0, level: 1 },
-            fr: { scores: 0, level: 1 }
-          }
+          score: 0,
+          badges: []
         }).save(function(err, newUser) {
           if (err) return done(err);
           return done(null, newUser);
