@@ -42,8 +42,9 @@ function CodeViewModel() {
 
 	self.setProblem = function(problem) {
 		// TODO: make problem part of firePad
+		console.log(problem);
 		self.currentProblem(problem);
-		firePad.setCode(problem.starterCode);
+		firePad.setCode(problem.description + problem.starterCode);
 	};
 
 	self.onSwitchTo = function(done, info) {
