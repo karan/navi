@@ -5,7 +5,7 @@ function CodeViewModel() {
 	var setUpFirePad = function(done, problem) {
 		// TODO: Problem will be a Problem object
 		firePad = new FirePad(function() {
-			setProblem(problem);
+			self.setProblem(problem);
 			done();
 		});
 	};
