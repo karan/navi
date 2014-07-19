@@ -12,7 +12,7 @@ var RedisStore = require('connect-redis')(express);
 var redis;
 
 if (Constants.REDISTOGO_URL) {
-  console.log("using reditogo");
+  console.log("using redistogo");
   rtg   = require('url').parse(Constants.REDISTOGO_URL);
   redis = require('redis').createClient(rtg.port, rtg.hostname);
   redis.auth(rtg.auth.split(':')[1]); // auth 1st part is username and 2nd is password separated by ":"
@@ -68,13 +68,13 @@ var server = http.createServer(app);
 // Connect to socket
 var io = require('socket.io')(server);
 var ProblemSession = require('./private/models/problemsession');
+var clients = {};
 
 io.sockets.on('connection', function (socket) {
-  socket.emit('connected');
 
   // Sets up the user data
   socket.on('sessionConnected', function (game) {
-    console.log("connecting to other person");
+    console.log("connecting to other person " + game.problemsession);
     ProblemSession.findById(game.problemsession, function(err, ps) {
       if (!ps.connected) {
         console.log("emit to client");

@@ -14,6 +14,7 @@ body {
 	padding: 0;
 	color: #bdc3c7;
 	overflow: hidden;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .purple {
@@ -113,6 +114,7 @@ body {
 }
 
 .top-profile img {
+	border-radius: 50%;
 	width: 50px;
 	height: 50px;
 }

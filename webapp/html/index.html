@@ -2,8 +2,6 @@
 <html>
 	<head>
 		<title>Navi</title>
-		<link rel="icon" type="image/png" href="../img/favicon.png" />
-		<link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../css/base.css">
 		<link rel="stylesheet" href="../css/tomorrow-night.css">
@@ -17,10 +15,10 @@
 			<!-- PROFILE SCREEN -->
 			<div id="profile" data-bind="visible: isProfileVisible(), with: VM.profile" style="display: none">
 				<div class="top-bar">
-					<img src="../img/logo-small.png" class="top-logo" />
+					<img src="../img/logo-small.png" class="top-logo">
 					<div class="top-profile" data-bind="click: onClickProfile">
 						<div class="overlay"></div>
-						<img data-bind="attr: {src: $root.getProfilePictureSrc()}" />
+						<img data-bind="attr: {src: $root.getProfilePictureSrc()}">
 					</div>
 					<div class="back-button-top" data-bind="click: onClickBack"></div>
 				</div>
@@ -37,8 +35,8 @@
 				<div id="firepad-container"></div>
 				<div id="chat">
 					<div id="navi-header">
-						<span id="navi-header-text">Navi</span>
-						<span id="navi-header-profile">Amit B.</span>
+						<img src="../img/logo-small.png" id="navi-header-image">
+						<img data-bind="attr: {src: $root.getProfilePictureSrc()}" id="navi-header-profile">
 					</div>
 					<div id="firechat-container"></div>
 				</div>
@@ -48,10 +46,10 @@
 							<div id="test-fail" data-bind="visible: fails()"></div>
 							<div id="test-pass" data-bind="visible: !fails()"></div>
 						</div>
-						<button id="submit-button" data-bind="click: runTests">Submit</button>
+						<button id="submit-button" data-bind="click: runTests">Submit Code</button>
 					</div>
 					<div id="chat-input">
-						<input type="text" id="chat-input-box" data-bind="event: {change: sendMessage}">
+						<input type="text" id="chat-input-box" data-bind="event: {change: sendMessage}" placeholder="Type to chat">
 					</div>
 				</div>
 			</div>
@@ -59,9 +57,9 @@
 			<!-- CHOOSE SCREEN -->
 			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose" style="display: none">
 				<div class="top-bar">
-					<img src="../img/logo-small.png" class="top-logo" />
+					<img src="../img/logo-small.png" class="top-logo">
 					<div class="top-profile" data-bind="click: onClickProfile">
-						<img data-bind="attr: {src: $root.getProfilePictureSrc()}" />
+						<img data-bind="attr: {src: $root.getProfilePictureSrc()}">
 					</div>
 				</div>
 				<h2 class="center-title console-text">
@@ -78,7 +76,7 @@
 
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login" style="display: none">
-				<img class="center-logo" src="../img/logo-large.png" />
+				<img class="center-logo" src="../img/logo-large.png">
 				<p class="tagline console-text">
 					the <span class="purple">collaborative</span> way to learn to <span data-bind="text: tagline.text"></span>
 					<span class="cursor-holder">
