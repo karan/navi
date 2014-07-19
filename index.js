@@ -63,6 +63,14 @@ app.post('/submit_score', auth.requiresLogin, routes.submitScore);
 
 require('./private/pass.js')(passport);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+// Connect to socket
+var io = require('socket.io')(server);
+io.on('connection', function() {
+  console.log('connected');
+});
+
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
