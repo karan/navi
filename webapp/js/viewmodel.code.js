@@ -32,6 +32,7 @@ function CodeViewModel() {
 	self.tester = new Tester();
 
 	self.runTests = function() {
+		self.tester.setUserCode(firePad.getCode());
 		self.tester.run();
 	};
 

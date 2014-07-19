@@ -30,8 +30,17 @@ function Tester() {
 
 	self.run = function() {
 		if (self.tests() && code) {
-			for(var i = 0; i < tests.length; i++) {
-				self.tests()[i].fails(eval(makeCode(self.tests()[i])) == self.tests()[i].getExpected());
+			for(var i = 0; i < self.tests().length; i++) {
+				var pass = false;
+				var result = null;
+				try {
+				    result = eval(makeCode(self.tests()[i]));
+				    pass = result == self.tests()[i].getExpected();
+				} catch (e) {
+					pass = false;
+					result = null;
+				}
+				self.tests()[i].fails(!pass);
 			}
 		}
 	};
