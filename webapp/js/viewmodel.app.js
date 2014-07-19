@@ -1,5 +1,6 @@
-function AppViewModel() {
+function AppViewModel(facebookUser) {
 	var self = this;
+	var user = facebookUser;
 
 	self.VM = {
 		code : new CodeViewModel(),
@@ -29,6 +30,14 @@ function AppViewModel() {
 
 	self.currentScreen = new ko.observable('');
 
+	self.isAuthenticated = function() {
+		return user != null && user != {} && user.fbId;
+	};
+
+	self.getUser = function() {
+		return user;
+	};
+
 	self.isCodeVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.CODE;
 	};
@@ -46,6 +55,9 @@ function AppViewModel() {
 	};
 
 	self.setScreen = function(screen, optData) {
+		if (!self.isAuthenticated()) {
+			screen = SCREEN_TYPE.LOGIN;
+		}
 		var viewModel = screenTypeToVM(screen);
 		viewModel.onSwitchTo(function() {
 			self.currentScreen(screen);

@@ -51,7 +51,9 @@
 			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose" style="display: none">
 				<div class="top-bar">
 					<img src="../img/logo-small.png" class="top-logo" />
-					<div class="top-profile" data-bind="click: onClickProfile"></div>
+					<div class="top-profile" data-bind="click: onClickProfile">
+						<img src="" />
+					</div>
 				</div>
 				<h2 class="center-title console-text">
 					<span data-bind="text: title.text"></span>
