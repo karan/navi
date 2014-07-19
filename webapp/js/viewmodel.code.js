@@ -6,6 +6,7 @@ function CodeViewModel() {
 	self.fireChat = null;
 
 	var setUpFirePad = function(done, problem) {
+		console.log("SETTING UP FIRE PAD");
 		// TODO: Problem will be a Problem object
 		firePad = new FirePad(roomId, function() {
 			self.setProblem(problem);
@@ -14,6 +15,7 @@ function CodeViewModel() {
 	};
 
 	var setUpFireChat = function(done, info) {
+		console.log("SETTING UP FIRE CHAT");
 		self.fireChat = new FireChat(roomId, info, function() {
 			$('#code').slideDown('slow');
 			done();
@@ -21,12 +23,14 @@ function CodeViewModel() {
 	};
 
 	var setUpFriend = function(game, done) {
+		console.log("SETTING UP FRIEND PROBLEM");
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
 		done(problem);
 	};
 
 	var setUpRandom = function(game, done) {
+		console.log("SETTING UP RANDOM PROBLEM");
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
 		done(problem);
@@ -40,12 +44,12 @@ function CodeViewModel() {
 		if(!self.runningTests()) {
 			console.log("EMITTING RUN TESTS");
 			app.getSocket().emit('runTests');
-			self.runningTests(true);
 			self.runTester();
 		}
 	};
 
 	self.runTester = function() {
+		self.runningTests(true);
 		self.tester.setUserCode(firePad.getCode());
 		self.tester.run(function(allPassed) {
 			self.runningTests(false);
