@@ -39,4 +39,8 @@ function ChooseViewModel() {
 			}
 		});
 	};
+
+	self.onClickProfile = function() {
+		app.setScreen(SCREEN_TYPE.PROFILE);
+	};
 }
