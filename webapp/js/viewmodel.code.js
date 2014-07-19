@@ -2,6 +2,7 @@ function CodeViewModel() {
 	var self = this;
 	var firePad = null;
 	var roomId = null;
+	var game = null;
 	var facebook = new Facebook();
 	self.fireChat = null;
 
@@ -22,14 +23,14 @@ function CodeViewModel() {
 		});
 	};
 
-	var setUpFriend = function(game, done) {
+	var setUpFriend = function(done) {
 		console.log("SETTING UP FRIEND PROBLEM");
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
 		done(problem);
 	};
 
-	var setUpRandom = function(game, done) {
+	var setUpRandom = function(done) {
 		console.log("SETTING UP RANDOM PROBLEM");
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
@@ -76,7 +77,8 @@ function CodeViewModel() {
 	self.onSwitchTo = function(done, info) {
 		console.log("SWITCHING TO CODE VIEW");
 		roomId = info.game.problemsession;
-		if (roomId) {
+		game = info.game;
+		if (roomId && game) {
 			if (info.type == MODE.FRIENDS) {
 				setUpFriend(info.game, function(problem) {
 					setUpFirePad(done, problem);
