@@ -6,11 +6,9 @@ function Tester() {
     var RETURN = ' return ';
 	var END_FUNCTION = '})();';
 
-
-
 	var makeCode = function(test) {
-		return START_FUNCTION + 
-				code + 
+		return START_FUNCTION +
+				code +
 				RETURN +
 				test.getTestExpression() +
 				END_FUNCTION;
@@ -40,8 +38,8 @@ function Tester() {
 				var pass = false;
 				var result = null;
 				try {
-				    result = eval(makeCode(self.tests()[i]));
-				    pass = result == self.tests()[i].getExpected();
+			    result = eval(makeCode(self.tests()[i]));
+			    pass = result == self.tests()[i].getExpected();
 				} catch (e) {
 					pass = false;
 					result = null;

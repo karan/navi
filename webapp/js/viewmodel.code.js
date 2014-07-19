@@ -44,7 +44,7 @@ function CodeViewModel() {
 	self.onRunTestsClick = function() {
 		if(!self.runningTests()) {
 			console.log("EMITTING RUN TESTS");
-			app.getSocket().emit('runTests');
+			app.getSocket().emit('runTests', game, app.getUser()._id);
 			self.runTester();
 		}
 	};

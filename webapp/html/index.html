@@ -18,7 +18,6 @@
 				<div class="top-bar">
 					<img src="../img/logo-small.png" class="top-logo">
 					<div class="top-profile" data-bind="click: onClickProfile">
-						<div class="overlay"></div>
 						<img data-bind="attr: {src: $root.getProfilePictureSrc()}">
 					</div>
 					<div class="back-button-top" data-bind="click: onClickBack"></div>
@@ -29,6 +28,7 @@
 						<span id="profile-title-cursor" style="display: none;">█</span>
 					</span>
 				</h2>
+				<h3 class="center-subtitle console-text" data-bind="text: points.text"></h3>
 			</div>
 
 			<!-- CODING SCREEN -->

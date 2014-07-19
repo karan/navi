@@ -86,12 +86,22 @@ io.sockets.on('connection', function (socket) {
   socket.on('sessionConnected', function (game, mode) {
     console.log("connecting to other person " + JSON.stringify(game));
     ProblemSession.findById(game.problemsession, function(err, ps) {
-      if (!ps.connected) {
-        console.log("emit to other client");
-        // io.sockets.in(ps.user1).emit('connectToGame', game, mode);
+      console.log("emit to other client");
+      ps.connected = true;
+      ps.save(function(err, ps) {
         io.sockets.in(ps.user2).emit('connectToGame', game, mode);
-      }
+      });
     });
+  });
+
+  socket.on('runTests', function (game, id) {
+    console.log(id);
+    for (var i = 0; i < game.users.length; ++i) {
+      if (game.users[i]._id !== id) {
+        console.log("in loop: " + game.users[i]._id);
+        io.sockets.in(game.users[i]._id).emit('runMyTests');
+      }
+    }
   });
 
   socket.on('disconnect', function () {

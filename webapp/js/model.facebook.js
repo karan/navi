@@ -1,6 +1,12 @@
 function Facebook() {
   var self = this;
 
+  self.getUserData = function(callback) {
+    $.getJSON('/user', function(data) {
+      callback(data);
+    })
+  };
+
   self.connectToFriend = function(callback) {
     // See README.md
     $.getJSON("/start?option=friend", function(data) {
