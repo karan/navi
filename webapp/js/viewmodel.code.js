@@ -6,7 +6,7 @@ function CodeViewModel() {
 
 	var setUpFirePad = function(done, roomId, problem) {
 		// TODO: Problem will be a Problem object
-		firePad = new FirePad(function() {
+		firePad = new FirePad(roomId, function() {
 			self.setProblem(problem);
 			done();
 		});
@@ -46,14 +46,15 @@ function CodeViewModel() {
 	};
 
 	self.onSwitchTo = function(done, info) {
+		console.log(info);
 		if (info.type == MODE.FRIENDS) {
 			setUpFriend(info.game, function(problem) {
-				setUpFirePad(done, info.problemsession, problem);
+				setUpFirePad(done, info.game.problemsession, problem);
 				setUpFireChat(done);
 			});
 		} else if (info.type == MODE.RANDOM) {
 			setUpRandom(info.game, function(problem) {
-				setUpFirePad(done, problem);
+				setUpFirePad(done, info.game.problemsession, problem);
 				setUpFireChat(done);
 			});
 		} else {

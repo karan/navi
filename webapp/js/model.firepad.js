@@ -1,4 +1,5 @@
 function FirePad(roomId, callbackVM) {
+	console.log(roomId);
 	var self = this;
 
 	var ref = new Firebase('https://crackling-fire-3374.firebaseio.com/navi/room/' + roomId);
