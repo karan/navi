@@ -37,10 +37,6 @@ function AppViewModel() {
 		return self.currentScreen() == SCREEN_TYPE.CHOOSE;
 	};
 
-	self.setGameMode = function(mode) {
-		return self.currentScreen() == SCREEN_TYPE.CHOOSE;
-	};
-
 	self.setScreen = function(screen, optData) {
 		var viewModel = screenTypeToVM(screen);
 		viewModel.onSwitchTo(function() {

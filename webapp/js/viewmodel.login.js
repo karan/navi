@@ -15,7 +15,7 @@ function LoginViewModel() {
 	self.login = function() {
 		// TODO: implement actual login
 		// 
-		app.setScreen(SCREEN_TYPE.CODE);
+		app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM});
 	}
 
 	self.onSwitchTo = function(done) {
