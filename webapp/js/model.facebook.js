@@ -4,8 +4,6 @@ function Facebook() {
   self.connectToFriend = function(callback) {
     // See README.md
     $.getJSON("/start?option=friend", function(data) {
-      console.log("EMITTING JOIN ROOM...");
-      app.getSocket().emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
@@ -13,8 +11,6 @@ function Facebook() {
   self.connectToRandom = function(callback) {
     // See README.md
     $.getJSON("/start?option=all", function(data) {
-      console.log("EMITTING JOIN ROOM...");
-      app.getSocket().emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
