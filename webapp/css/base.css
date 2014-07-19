@@ -93,3 +93,8 @@ body {
 	background: #b280c7;
 	color: #2a2c2b;
 }
+
+.top-bar {
+	height: 50px;
+	width: 100%;
+}
