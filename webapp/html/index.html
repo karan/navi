@@ -46,7 +46,7 @@
 							<div id="test-fail" data-bind="visible: fails()"></div>
 							<div id="test-pass" data-bind="visible: !fails()"></div>
 						</div>
-						<button id="submit-button" data-bind="click: runTests">Submit Code</button>
+						<button id="submit-button" data-bind="click: onRunTestsClick">Submit Code</button>
 					</div>
 					<div id="chat-input">
 						<input type="text" id="chat-input-box" data-bind="event: {change: sendMessage}" placeholder="Type to chat">

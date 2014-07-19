@@ -1,8 +1,8 @@
 function AppViewModel(facebookUser, init) {
+	console.log("APP STARTUP");
 	var self = this;
 	var user = facebookUser;
 	var socket = io();
-	socket.on('connect', self.onConnectedToSocket);
 
 	self.VM = {
 		code : new CodeViewModel(),
@@ -68,6 +68,7 @@ function AppViewModel(facebookUser, init) {
 	};
 
 	self.onConnectedToSocket = function() {
+		console.log("CONNECTED TO SOCKET. APPLYING BINDINGS...");
 		self.VM.code.onConnectedToSocket();
 		self.VM.login.onConnectedToSocket();
 		self.VM.choose.onConnectedToSocket();
@@ -84,4 +85,6 @@ function AppViewModel(facebookUser, init) {
 			self.currentScreen(screen);
 		}, optData);
 	};
+
+	socket.on('connect', self.onConnectedToSocket);
 }
