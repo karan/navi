@@ -21,7 +21,6 @@ function ChooseViewModel() {
 	self.onConnectedToGameSession = function(game, mode) {
 	  console.log("CONNECTED TO GAME SESSION");
     console.log("I'm the other client " + app.getSocket());
-    console.log("connecting to game session ");
     console.log(game);
     app.setScreen(SCREEN_TYPE.CODE, {'type' : mode, 'game' : game});
 	};
