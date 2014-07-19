@@ -38,7 +38,7 @@ function CodeViewModel() {
 
 	self.currentProblem = new ko.observable();
 	self.tester = new Tester();
-	self.runningTests = new ko.observable(true);
+	self.runningTests = new ko.observable(false);
 
 	self.onRunTestsClick = function() {
 		if(!self.runningTests()) {
