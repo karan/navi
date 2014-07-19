@@ -28,7 +28,7 @@
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login" style="display: none">
 				<img class="center-logo" src="../img/logo-large.png" />
-				<p class="tagline">the collaborative way to learn to code<span id="blink" style="display: none;">█</span></p>
+				<p class="tagline">the collaborative way to learn to code<span id="logo-cursor" style="display: none;">█</span></p>
 				<div class="fb-button" data-bind="click: login"></div>
 			</div>
 		</div>
@@ -45,6 +45,7 @@
 		<!-- Models -->
 		<script src="../js/model.screentype.js"></script>
 		<script src="../js/model.mode.js"></script>
+		<script src="../js/model.blinker.js"></script>
 		<script src="../js/model.firepad.js"></script>
 		<script src="../js/model.test.js"></script>
 		<script src="../js/model.tester.js"></script>
