@@ -29,8 +29,9 @@ function ChooseViewModel() {
 		self.title.write('Checking friends online now...', 50);
 		facebook.connectToFriend(function(game) {
 			if(game) {
-				self.title.write('Found! Loading...', 50);
-				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
+				self.title.write('Found! Loading...', 50, function() {
+					app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
+				});
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {
 					cursor.stop();
