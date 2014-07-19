@@ -39,7 +39,10 @@ function AppViewModel(facebookUser) {
 	};
 
 	self.getProfilePictureSrc = function() {
-		return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large';
+		if(self.isAuthenticated()) {
+			return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large';
+		}
+		return null;
 	};
 
 	self.isCodeVisible = function() {
