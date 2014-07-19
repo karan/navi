@@ -2,11 +2,18 @@ function CodeViewModel() {
 	var self = this;
 	var firePad = null;
 	var facebook = new Facebook();
+	var fireChat = null;
 
 	var setUpFirePad = function(done, problem) {
 		// TODO: Problem will be a Problem object
 		firePad = new FirePad(function() {
 			self.setProblem(problem);
+			done();
+		});
+	};
+
+	var setUpFireChat = function(done) {
+		fireChat = new FireChat(function() {
 			done();
 		});
 	};
@@ -43,13 +50,19 @@ function CodeViewModel() {
 		if (info.type == MODE.FRIENDS) {
 			setUpFriend(info.game, function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
 		} else if (info.type == MODE.RANDOM) {
 			setUpRandom(info.game, function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
 		} else {
 			throw {name: 'FatalError', message: 'Unsupport mode'};
 		}
 	};
+
+	self.sendMessage = function(model, event) {
+		event.currentTarget.value = '';
+	}
 }
