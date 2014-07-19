@@ -24,6 +24,8 @@ if (Constants.REDISTOGO_URL) {
 app.configure(function(){
   app.set('port', process.env.PORT || 8888);
   app.set('views', __dirname + '/webapp/html');
+  app.set('view engine', 'html');
+  app.engine('html', require('hbs').__express);
   app.use(express.static(path.join(__dirname, 'webapp')));
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
