@@ -65,11 +65,24 @@ app.post('/finalize_session', auth.requiresLogin, routes.finalizeSession);
 require('./private/pass.js')(passport);
 
 var server = http.createServer(app);
-
 // Connect to socket
 var io = require('socket.io')(server);
-io.on('connection', function() {
-  console.log('connected to socket.io');
+var ProblemSession = require('./private/models/problemsession');
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('connected');
+
+  // Sets up the user data
+  socket.on('sessionConnected', function (game) {
+    console.log("connecting to other person");
+    ProblemSession.findById(game.problemsession, function(err, ps) {
+      if (!ps.connected) {
+        console.log("emit to client");
+        socket.broadcast.emit('connectOther', game);
+      }
+    });
+  });
+
 });
 
 server.listen(app.get('port'), function(){
