@@ -5,7 +5,7 @@ function Facebook() {
     // See README.md
     $.getJSON("/start?option=friend", function(data) {
       console.log("EMITTING JOIN ROOM...");
-      socket.emit('joinRoom', app.getUser()._id);
+      app.getSocket().emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
@@ -14,7 +14,7 @@ function Facebook() {
     // See README.md
     $.getJSON("/start?option=all", function(data) {
       console.log("EMITTING JOIN ROOM...");
-      socket.emit('joinRoom', app.getUser()._id);
+      app.getSocket().emit('joinRoom', app.getUser()._id);
       callback(data);
     });
   };
@@ -25,7 +25,7 @@ function Facebook() {
         user_solution: user_solution, score: score, problem_session: problem_session
       }, function(data) {
         console.log("EMITTING END SESSION...");
-        socket.emit('endSession');
+        app.getSocket().emit('endSession');
         callback(data);
       });
   }
