@@ -121,7 +121,9 @@
 		<!-- Init -->
 		<script type="text/javascript">
 			// handlebar variable assignment here.
-			var facebookUser = JSON.parse($('<div/>').html('{{userString}}').text());
+			{{#if userString }}
+				var facebookUser = JSON.parse($('<div/>').html('{{userString}}').text());
+			{{/if}}
 		</script>
 		<script type="text/javascript" src="../js/init.js"></script>
 	</body>
