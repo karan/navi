@@ -18,8 +18,8 @@ function Tester() {
 				END_FUNCTION;
 	};
 
-	self.addTest = function(test) {
-		tests.push(test);
+	self.setTests = function(newTests) {
+		tests = newTests;
 	};
 
 	self.clearTests = function() {

@@ -5,6 +5,7 @@
 		<link rel="icon" type="image/png" href="../img/favicon.png" />
 		<link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../css/base.css">
 		<link rel="stylesheet" href="../css/codemirror.css">
 		<link rel="stylesheet" href="../css/firepad.css">
 		<link rel="stylesheet" href="../css/style.css">
@@ -23,7 +24,9 @@
 
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login">
-				<h1 data-bind="text: header"></h1>
+				<img class="center-logo" src="../img/logo-large.png" />
+				<p class="tagline">the collaborative way to learn to code</p>
+				<div class="fb-button" data-bind="click: login"></div>
 			</div>
 		</div>
 
@@ -39,7 +42,9 @@
 		<!-- Models -->
 		<script src="../js/model.screentype.js"></script>
 		<script src="../js/model.firepad.js"></script>
+		<script src="../js/model.test.js"></script>
 		<script src="../js/model.tester.js"></script>
+		<script src="../js/model.problem.js"></script>
 
 		<!-- View Models -->
 		<script src="../js/viewmodel.code.js"></script>
