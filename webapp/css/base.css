@@ -31,12 +31,12 @@ body {
 }
 
 .tagline {
-	width: 450px;
+	width: 495px;
 	display: block;
 	margin: 0 auto;
 	font-weight: bold;
 	margin-top: 20px;
-	font-size: 1.20em;
+	font-size: 1.15em;
 }
 
 .fb-button {

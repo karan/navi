@@ -3,6 +3,7 @@ function ProfileViewModel() {
 	var cursor = new Blinker('profile-title-cursor', 500);
 	self.title = new Typer('');
 
+
 	self.onClickProfile = function() {
 		// Nada?
 	};
