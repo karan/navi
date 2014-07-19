@@ -4,7 +4,7 @@ function CodeViewModel() {
 	var facebook = new Facebook();
 	var fireChat = null;
 
-	var setUpFirePad = function(done, problem) {
+	var setUpFirePad = function(done, roomId, problem) {
 		// TODO: Problem will be a Problem object
 		firePad = new FirePad(function() {
 			self.setProblem(problem);
@@ -19,14 +19,12 @@ function CodeViewModel() {
 	};
 
 	var setUpFriend = function(game, done) {
-		// TODO
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
 		done(problem);
 	};
 
 	var setUpRandom = function(game, done) {
-		// TODO
 		var problem = new Problem(game.problem);
 		self.tester.setTests(problem.tests);
 		done(problem);
@@ -50,7 +48,7 @@ function CodeViewModel() {
 	self.onSwitchTo = function(done, info) {
 		if (info.type == MODE.FRIENDS) {
 			setUpFriend(info.game, function(problem) {
-				setUpFirePad(done, problem);
+				setUpFirePad(done, info.problemsession, problem);
 				setUpFireChat(done);
 			});
 		} else if (info.type == MODE.RANDOM) {

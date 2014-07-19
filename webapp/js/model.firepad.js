@@ -1,7 +1,7 @@
-function FirePad(callbackVM) {
+function FirePad(roomId, callbackVM) {
 	var self = this;
 
-	var ref = new Firebase('https://crackling-fire-3374.firebaseio.com/navi/room/1');
+	var ref = new Firebase('https://crackling-fire-3374.firebaseio.com/navi/room/' + roomId);
 
 	var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
 		lineNumbers: true,
