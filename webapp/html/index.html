@@ -13,6 +13,11 @@
 	</head>
 	<body>
 		<div id="app">
+			<!-- PROFILE SCREEN -->
+			<div id="profile" data-bind="visible: isProfileVisible(), with: VM.profile" style="display: none">
+				<h1>profile</h1>
+			</div>
+
 			<!-- CODING SCREEN -->
 			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code" style="display: none">
 				<div id="firepad-container"></div>
@@ -77,7 +82,6 @@
 		<script src="../js/model.mode.js"></script>
 		<script src="../js/model.blinker.js"></script>
 		<script src="../js/model.typer.js"></script>
-		<script src="../js/model.problembank.js"></script>
 		<script src="../js/model.facebook.js"></script>
 		<script src="../js/model.firepad.js"></script>
 		<script src="../js/model.test.js"></script>
@@ -87,6 +91,7 @@
 		<!-- View Models -->
 		<script src="../js/viewmodel.code.js"></script>
 		<script src="../js/viewmodel.choose.js"></script>
+		<script src="../js/viewmodel.profile.js"></script>
 		<script src="../js/viewmodel.login.js"></script>
 		<script src="../js/viewmodel.app.js"></script>
 

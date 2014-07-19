@@ -3,7 +3,7 @@ function ProblemBank() {
 
 	self.getRandomProblem = function(callback) {
 		$.getJSON('/problem', function (json) {
-			// var json = {
+			// var PROBLEM = {
 			// 	'description' : 'this is your task.. blah blah',
 			// 	'starterCode' : 'function square(x) { //implement here }',
 			// 	'tests' : [

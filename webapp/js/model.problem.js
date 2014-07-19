@@ -1,4 +1,5 @@
 function Problem(json) {
+	console.log(json);
 	var self = this;
 	self.title = ko.observable(json.title);
 	self.starterCode = json.starterCode;
