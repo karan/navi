@@ -3,7 +3,7 @@
 //
 // Example:
 //
-// require('./private/helpers/friends').getOnlineFriends([], function (friends) {
+// require('./private/helpers/friends').getOnlineFriends([{id:234}], function (friends) {
 //   console.log('friends:');
 //   console.log(friends);
 // });
