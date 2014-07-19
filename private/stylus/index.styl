@@ -1,0 +1,301 @@
+@import 'reset'
+
+bgColor = #d24944
+enColor = rgb(82, 100, 174)
+esColor = rgb(29, 233, 182)
+frColor = rgb(255, 235, 41)
+zhColor = rgb(3, 169, 244)
+darkTextColor = rgb(97, 97, 97)
+
+shadowHeight = 3px
+shadowDarkenAmount = 30%
+highlightAmount = 20%
+transitionSpeed = 300ms
+
+button(color)
+  cursor pointer
+  transition background-color transitionSpeed, box-shadow transitionSpeed, margin transitionSpeed
+  background-color color
+  box-shadow 0 shadowHeight 0 darken(color, shadowDarkenAmount)
+  &:hover
+    if color != 'transparent'
+      background-color lighten(color, highlightAmount)
+    box-shadow 0 shadowHeight 0 color
+    margin-top shadowHeight
+
+  box-shadow 0px shadowHeight*2 0 0 darken(color, shadowDarkenAmount)
+
+.left
+  float left
+.right
+  float right
+
+html, body, .page, .content
+  height 100%
+
+body
+  font-family RobotoDraft
+  font-weight 300
+  color white
+
+headerHeight = 50px
+header
+  padding 10px 10px 0 10px
+  position absolute
+  z-index 400
+  height headerHeight
+  width 100%
+  transition color transitionSpeed
+  &.es
+    color darkTextColor
+  &.fr
+    color darkTextColor
+  .logo
+    margin-top 5px
+    opacity 0.4
+    padding 0 0 0 10px
+    width 100px
+  .name, .leaderboard
+    margin-top 5px
+    font-size 20px
+    float left
+    padding-right 20px
+    cursor pointer
+  .profilePhoto
+    float right
+    border-radius 50%
+    width headerHeight*0.6
+
+.page
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+
+.content
+  position absolute
+  width 100%
+
+// Login
+.page.login
+  .content
+    background-color bgColor
+    .modal
+      modalHeight = 300px
+      margin-top 10%;
+      margin-left auto
+      margin-right auto
+      height modalHeight
+      text-align center
+
+      .logo
+        margin 0 auto
+        position relative
+      .title
+        font-size 60px
+        margin-bottom 40px
+      .subtitle
+        font-size 30px
+        margin-bottom 30px
+      .signinButton
+        padding 20px
+        border-radius 10px
+        button(#f3d392)
+
+// Home
+.page.home
+  z-index 200
+  .curtain
+    position absolute
+    width 50%
+    height 100%
+    overflow hidden
+    .content
+      width 200%
+  .content
+    background-color bgColor
+    .languages
+      margin 0 auto
+      padding-top headerHeight
+      max-width 400px
+      .languageArea
+        width 50%
+        height 200px
+        overflow hidden
+        display inline-block
+        .languageButton
+          text-align center
+          padding 20%
+          width 100%
+          height 100%
+          &.es .languageBox
+            color darkTextColor
+            button(esColor)
+          &.en .languageBox
+            button(enColor)
+          &.fr .languageBox
+            color darkTextColor
+            button(frColor)
+          &.zh .languageBox
+            button(zhColor)
+          .languageBox
+            overflow hidden
+            width 100%
+            height 100%
+            border-radius 10%
+            padding 40px 30px
+            font-size 40px
+            color white
+            vertical-align bottom
+
+// Game
+.page.game
+  z-index 100
+  .content
+    &:not(.transitionsDisabled)
+      transition transform 1s
+    &.en
+      background-color enColor
+    &.es
+      color darkTextColor
+      background-color esColor
+    &.fr
+      color darkTextColor
+      background-color frColor
+    &.zh
+      background-color zhColor
+    .gameArea
+      width 400px
+      height 100%
+      margin 0 auto
+      padding-top headerHeight
+      .topHalf
+        text-align center
+        font-size 40px
+        position relative
+        height 50%
+        .fromBottom
+          width 100%
+          position absolute
+          padding-bottom 40px
+          line-height 200%
+          bottom 0
+          .text
+            position: relative
+            text-shadow 0 2px rgba(0, 0, 0, 0.26)
+            .good
+              color lighten(rgb(15, 157, 88), 20%)
+            .bad
+              color lighten(rgb(210, 63, 49), 20%)
+      .bottomHalf
+        position relative
+        text-align center
+        height 50%
+        buttonSize = 70px
+        .bigbutton
+          position relative
+          width buttonSize
+          height buttonSize
+          border-radius 50%
+          background-color white
+          border 1px solid #999
+          transition background-color transitionSpeed
+          box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+          cursor pointer
+          outline none
+          &.active
+            background-color bgColor
+            &:hover
+              background-color darken(bgColor, 20%)
+          &:hover
+            background-color #eee
+          .icon
+            opacity 0.3
+            &.mic
+              background url("/img/mic.png") no-repeat center
+              background-size buttonSize*0.4 buttonSize*0.4
+            &.right
+              background url("/img/right.png") no-repeat center
+              background-size buttonSize*0.4 buttonSize*0.4
+              margin-right 17px
+            margin 0 auto
+            width buttonSize*0.4
+            height buttonSize*0.4
+    .scoreNotif
+      position absolute
+      bottom 20px
+      right 20px
+      padding 10px
+      background-color rgba(0,0,0,.3)
+      border-radius 50%
+      width 60px
+      height 60px
+      line-height 40px
+      text-align center
+      color #fff
+      font-weight bold
+      font-size 120%
+      letter-spacing 2px
+    .scoreBar
+      position: absolute
+      bottom 0
+      height 10px
+      transition width transitionSpeed
+      background-color rgba(255, 255, 255, 0.5)
+
+.page.leaderpage
+  z-index 10
+  background-color rgb(111, 178, 105)
+  .content
+    .boardArea
+      padding-top headerHeight
+      width 400px
+      margin 0 auto
+      li
+        margin-bottom 10px
+        position: relative
+        .bg
+          position: absolute
+          width 100%
+          height 100%
+          div
+            display inline-block
+            height 100%
+            opacity 0.8
+            &.es
+              background-color esColor
+            &.en
+              background-color enColor
+            &.fr
+              background-color frColor
+            &.zh
+              background-color zhColor
+        .user
+          font-weight 700
+          position: relative
+          padding 20px
+      .legend
+        li
+          display: inline-block
+          width 25%
+          text-align: center
+          padding: 10px
+          div
+            border-radius 10px
+            padding 10px
+          &.es div
+            color darkTextColor
+            background-color esColor
+          &.en div
+            background-color enColor
+          &.fr div
+            color darkTextColor
+            background-color frColor
+          &.zh div
+            background-color zhColor
+
+
+// Init CSS
+.page.home, .page.game, .page.leaderpage
+  display none
