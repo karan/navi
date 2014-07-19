@@ -25,7 +25,7 @@
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login">
 				<img class="center-logo" src="../img/logo-large.png" />
-				<p class="tagline">the collaborative way to learn to code</p>
+				<p class="tagline">the collaborative way to learn to code<span id="blink" style="display: none;">█</span></p>
 				<div class="fb-button" data-bind="click: login"></div>
 			</div>
 		</div>
@@ -53,6 +53,9 @@
 		<script src="../js/viewmodel.app.js"></script>
 
 		<!-- Init -->
+		<script type="text/javascript">
+		// handlebar variable assignment here.
+		</script>
 		<script type="text/javascript" src="../js/init.js"></script>
 	</body>
 </html>
