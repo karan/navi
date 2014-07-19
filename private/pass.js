@@ -34,6 +34,14 @@ module.exports = function (passport) {
     })
   });
 
+  function getFriends(accessToken, callback) {
+    request('https://graph.facebook.com/me?fields=friends&limit=1000&access_token='+accessToken,
+      function(err, resp, body) {
+        body = JSON.parse(body);
+        callback(body.friends.data);
+      });
+  }
+
   // Logic for facebook strategy
   passport.use(new FacebookStrategy({
     clientID: Constants.Facebook.APPID,
@@ -50,19 +58,25 @@ module.exports = function (passport) {
       } else {
         if (err) return done(err);
 
-        new User({
-          fbId: profile.id,
-          accessToken: token,
-          accessTokenSecret: tokenSecret,
-          email: profile.emails[0].value,
-          name: profile.displayName,
-          photo: profile.photos[0].value,
-          username: profile.emails[0].value.split('@')[0],
-          score: 0,
-          badges: []
-        }).save(function(err, newUser) {
-          if (err) return done(err);
-          return done(null, newUser);
+        getFriends(accessToken, function(friends) {
+          console.log("got " + friends.length + " friends");
+          console.log(friends);
+          new User({
+            fbId: profile.id,
+            accessToken: token,
+            accessTokenSecret: tokenSecret,
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            photo: profile.photos[0].value,
+            username: profile.emails[0].value.split('@')[0],
+            score: 0,
+            online: true,
+            badges: [],
+            friends: friends
+          }).save(function(err, newUser) {
+            if (err) return done(err);
+            return done(null, newUser);
+          });
         });
       }
     });

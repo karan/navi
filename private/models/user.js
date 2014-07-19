@@ -28,7 +28,9 @@ var userSchema = new Schema({
   name: String,
   fbId: String,
   score: Number,
-  badges: [String]
+  badges: [String],
+  friends: [],
+  online: Boolean
 });
 
 
