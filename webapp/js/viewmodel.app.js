@@ -73,8 +73,6 @@ function AppViewModel(facebookUser, init) {
 		self.VM.login.onConnectedToSocket();
 		self.VM.choose.onConnectedToSocket();
 		self.VM.profile.onConnectedToSocket();
-	  	console.log("EMITTING JOIN ROOM...");
-	  	app.getSocket().emit('joinRoom', app.getUser()._id);
 		init(self);
 	};
 
