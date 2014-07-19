@@ -33,6 +33,7 @@ function ChooseViewModel() {
 			self.title.write('Found! Loading...', 50);
 			console.log("EMITTING SESSION CONNECT...");
 			app.getSocket().emit('sessionConnected', game, MODE.RANDOM);
+			app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'game' : game});
 		});
 	};
 
@@ -44,6 +45,7 @@ function ChooseViewModel() {
 				self.title.write('Found! Loading...', 50);
 				console.log("EMITTING SESSION CONNECT...");
 				app.getSocket().emit('sessionConnected', game, MODE.FRIENDS);
+				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {
 					cursor.stop();
