@@ -15,7 +15,7 @@ function ProfileViewModel() {
 		app.setScreen(SCREEN_TYPE.CHOOSE);
 	};
 
-	self.onSwitchTo = function(done) {
+	self.onSwitchTo = function(done, newData) {
 		if(newData) {
 			flashMessage.setMessage('Congratulations! You have increased your score!');
 			flashMessage.flash();
