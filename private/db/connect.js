@@ -36,4 +36,3 @@ process.on('SIGINT', function() {
 
 // bring in all models
 require('./../models/user');
-require('./../models/thing');

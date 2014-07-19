@@ -13,15 +13,9 @@ var userSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  accessToken: {
-    type: String
-  },
-  accessTokenSecret: {
-    type: String
-  },
-  photo: {
-    type: String
-  },
+  accessToken: String,
+  accessTokenSecret: String,
+  photo: String,
   username: {
     type: String,
     unique: true
@@ -31,13 +25,10 @@ var userSchema = new Schema({
     unique: true,
     lowercase: true // force email lowercase
   },
-  name: {
-    type: String
-  },
+  name: String,
   fbId: String,
-  // scores and levels for each language
-  // format: levels.en.scores, or levels.en.level
-  levels: Object
+  score: Number,
+  badges: [String]
 });
 
 
