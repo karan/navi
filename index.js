@@ -23,9 +23,10 @@ if (Constants.REDISTOGO_URL) {
 
 app.configure(function(){
   app.set('port', process.env.PORT || 8888);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.set('views', __dirname + '/webapp/html');
+  app.set('view engine', 'html');
+  app.engine('html', require('hbs').__express);
+  app.use(express.static(path.join(__dirname, 'webapp')));
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -45,14 +46,15 @@ app.configure(function(){
 
 // GET
 app.get('/', routes.index);
-app.get('/auth/facebook', passport.authenticate("facebook", {scope:'email'}));
+app.get('/auth/facebook', passport.authenticate("facebook", {scope: 'email'}));
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/auth/error' }), 
   routes.authSuccess);
 app.get('/auth/error', routes.authError);
 
 app.get('/user', routes.getUser);
-app.get('/next_thing', auth.requiresLogin, routes.nextThing);
+
+app.get('/next_problem', auth.requiresLogin, routes.nextProblem);
 
 app.get('/leaderboard', routes.leaderboard);
 
@@ -62,6 +64,14 @@ app.post('/submit_score', auth.requiresLogin, routes.submitScore);
 
 require('./private/pass.js')(passport);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+// Connect to socket
+var io = require('socket.io')(server);
+io.on('connection', function() {
+  console.log('connected to socket.io');
+});
+
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

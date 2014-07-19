@@ -1,8 +1,8 @@
 var User = require('./../models/user');
-var Thing = require('./../models/thing');
+var Problem = require('./../models/problem');
+var ProblemSession = require('./../models/problemsession');
 
 exports.index = function (req, res){
-  // require('./../../save_gen');
   if (req.isAuthenticated()) {
     return res.render('index', {user: req.user});
   } else {
@@ -30,9 +30,8 @@ exports.getUser = function(req, res) {
 }
 
 // return next thing for the passed language
-exports.nextThing = function(req, res) {
-  var lang = req.query.lang;
-  Thing.find({'lang': lang, 'thingType': req.user.levels[lang].level}, function(err, docs) {
+exports.nextProblem = function(req, res) {
+  Problem.find({}, function(err, docs) {
     if (err) return res.send(500);
     res.send(200, docs[Math.floor(Math.random()*docs.length)]);
   });
