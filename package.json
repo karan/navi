@@ -15,6 +15,7 @@
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
     "redis": "^0.11.0",
-    "request": "^2.37.0"
+    "request": "^2.37.0",
+    "hbs": "~2.7.0"
   }
 }
