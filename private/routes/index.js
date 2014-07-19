@@ -31,6 +31,21 @@ exports.getUser = function(req, res) {
   }
 };
 
+exports.getProblem = function(req, res) {
+  if (req.isAuthenticated()) {
+    ProblemSession.findOne({
+      $or: [
+        {user1: req.user.id},
+        {user1: req.user.id}
+      ]
+    }).sort('-created_at').exec(function (problem) {
+      res.send(problem);
+    });
+  } else {
+    res.send(401, {});
+  }
+};
+
 function getFriends(user, callback) {
   request('https://graph.facebook.com/me/friends?limit=1000&access_token=' + user.accessToken,
     function(err, resp, body) {
