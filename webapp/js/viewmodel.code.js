@@ -14,6 +14,7 @@ function CodeViewModel() {
 
 	var setUpFireChat = function(done) {
 		fireChat = new FireChat(function() {
+			$('#code').slideDown('slow');
 			done();
 		});
 	};
@@ -46,7 +47,6 @@ function CodeViewModel() {
 	};
 
 	self.onSwitchTo = function(done, info) {
-		console.log(info);
 		if (info.type == MODE.FRIENDS) {
 			setUpFriend(info.game, function(problem) {
 				setUpFirePad(done, info.game.problemsession, problem);
