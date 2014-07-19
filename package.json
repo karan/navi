@@ -16,6 +16,7 @@
     "passport-facebook": "^1.0.3",
     "redis": "^0.11.0",
     "request": "^2.37.0",
-    "socket.io": "^1.0.6"
+    "socket.io": "^1.0.6",
+    "hbs": "~2.7.0"
   }
 }
