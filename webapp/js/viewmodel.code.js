@@ -5,7 +5,6 @@ function CodeViewModel() {
 	self.onSwitchTo = function(done) {
 		// Do initialization on a new
 		// switch
-		firePad = new FirePad();
-		done();
+		firePad = new FirePad(done);
 	};
 }

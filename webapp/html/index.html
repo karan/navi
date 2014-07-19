@@ -14,19 +14,19 @@
 	<body>
 		<div id="app">
 			<!-- CODING SCREEN -->
-			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code">
+			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code" style="display: none">
 				<div id="firepad-container"></div>
 				<div id="chat"></div>
 				<div id="code-bottom-bar"></div>
 			</div>
 
 			<!-- CHOOSE SCREEN -->
-			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose">
+			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose" style="display: none">
 				<h1 data-bind="text: header"></h1>
 			</div>
 
 			<!-- LOGIN SCREEN -->
-			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login">
+			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login" style="display: none">
 				<img class="center-logo" src="../img/logo-large.png" />
 				<p class="tagline">the collaborative way to learn to code<span id="blink" style="display: none;">█</span></p>
 				<div class="fb-button" data-bind="click: login"></div>
