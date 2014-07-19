@@ -1,6 +1,7 @@
 function CodeViewModel() {
 	var self = this;
 	var firePad = null;
+	var problemBank = new ProblemBank();
 
 	var setUpFirePad = function(done, problem) {
 		// TODO: Problem will be a Problem object
@@ -12,16 +13,31 @@ function CodeViewModel() {
 
 	var setUpFriend = function(done) {
 		// TODO
-		done();
+		problemBank.getRandomProblem(function(problem) {
+			self.tester.setTests(problem.tests);
+			done(problem);
+		});
 	};
 
 	var setUpRandom = function(done) {
 		// TODO
-		done();
+		problemBank.getRandomProblem(function(problem) {
+			console.log(problem);
+			self.tester.setTests(problem.tests);
+			done(problem);
+		});
+	};
+
+	self.currentProblem = new ko.observable();
+	self.tester = new Tester();
+
+	self.runTests = function() {
+		self.tester.run();
 	};
 
 	self.setProblem = function(problem) {
 		// TODO: make problem part of firePad
+		self.currentProblem(problem);
 	};
 
 	self.onSwitchTo = function(done, mode) {
