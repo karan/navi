@@ -32,7 +32,6 @@ function ChooseViewModel() {
 		self.title.write('Checking friends online now...', 50);
 		facebook.connectToFriend(function(game) {
 			if(game) {
-				
 				socket.emit('sessionConnected', game.problemsession);
 
 				self.title.write('Found! Loading...', 50);

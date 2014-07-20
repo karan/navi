@@ -28,8 +28,9 @@ function Tester() {
 		self.tests([]);
 	};
 
-	self.run = function() {
+	self.run = function(passHandle) {
 		if (self.tests() && code) {
+			var allPassed = true;
 			for(var i = 0; i < self.tests().length; i++) {
 				var pass = false;
 				var result = null;
@@ -40,12 +41,20 @@ function Tester() {
 					pass = false;
 					result = null;
 				}
+				allPassed = allPassed && pass;
 				self.tests()[i].fails(!pass);
+			}
+			if (allPassed && passHandler) {
+				passHandler();
 			}
 		}
 	};
 
 	self.setUserCode = function(userCode) {
 		code = userCode;
+	};
+
+	self.getUserCode = function() {
+		return code;
 	};
 }
