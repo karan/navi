@@ -55,14 +55,19 @@ function nextRandomProblem(callback) {
 
 
 function processAndServePs(reqUser, friends, randProblem, callback) {
+  var ps = {};
+  var processed = false;
+
   for (var i = 0; i < friends.length; i++) {
+    console.log("looping - " + i);
     var thisFriend = friends[i];
 //    User.findOne({fbId: thisFriend.fbId}, function(err, thisFriend) {
-      // if (thisFriend) {
+      if (thisFriend.fbId !== reqUser.fbId) {
         ProblemSession.findOne({ $or:[ 
             {problem: randProblem._id, user1: reqUser._id, user2: thisFriend._id}, 
             {problem: randProblem._id, user1: thisFriend._id, user2: reqUser._id}
           ]}, function(err, ps) {
+            console.log("found ps = " + ps);
             // ps is the problem session where both users solved this problem
             if (!ps) {
               new ProblemSession({
@@ -70,15 +75,22 @@ function processAndServePs(reqUser, friends, randProblem, callback) {
                 user1: reqUser._id,
                 user2: thisFriend._id
               }).save(function(err, newPS) {
-                console.log("new ps found = " + newPS);
+                console.log("new ps saved = " + newPS);
 
-                return callback({'problem': randProblem,
-                          'users': [reqUser, thisFriend],
-                          'problemsession': newPS._id});
+                ps = {'problem': randProblem,
+                      'users': [reqUser, thisFriend],
+                      'problemsession': newPS._id};
+                processed = true;
+                if (processed || i === friends.length - 1) {
+                  console.log("ending");
+                  callback(ps);
+                }
               });
+            } else {
+              callback({});
             }
         });
-      // }
+      }
     // });
   }
 }
@@ -98,11 +110,8 @@ exports.startSession = function(req, res) {
           randProblem = {'problem': 'abc', '_id': '123'};
           // DEBUG
           processAndServePs(req.user, friends, randProblem, function(ps) {
-            if (ps) {
-              return res.send(ps);
-            } else {
-              return res.send({});
-            }
+            console.log("in cb = " + ps);
+            return res.send(ps);
           });
         });
       });
@@ -117,11 +126,7 @@ exports.startSession = function(req, res) {
         randProblem = {'problem': 'abc', '_id': '123'};
         // DEBUG
         processAndServePs(req.user, users, randProblem, function(ps) {
-          if (ps) {
-            return res.send(ps);
-          } else {
-            return res.send({});
-          }
+          return res.send(ps);
         });
       });
     });
