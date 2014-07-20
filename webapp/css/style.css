@@ -67,6 +67,8 @@ html, body {
 	font-weight: bold;
 	color: #fff;
   border: none;
+  float: right;
+  border-radius: 5px;
   background-color: #272C3D;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
