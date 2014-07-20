@@ -50,7 +50,6 @@ function CodeViewModel() {
 	};
 
 	self.setProblem = function(problem) {
-		console.log(problem);
 		self.currentProblem(problem);
 		firePad.setCode(problem.starterCode);
 	};
