@@ -7,7 +7,23 @@ function AppViewModel() {
 		choose : new ChooseViewModel()
 	};
 
-	self.currentScreen = new ko.observable(SCREEN_TYPE.LOGIN);
+	var screenTypeToVM = function(screen) {
+		var viewModel = null;
+		switch(screen) {
+			case SCREEN_TYPE.CODE:
+				viewModel = self.VM.code;
+				break;
+			case SCREEN_TYPE.LOGIN:
+				viewModel = self.VM.login;
+				break;
+			case SCREEN_TYPE.CHOOSE:
+				viewModel = self.VM.choose;
+				break;
+		}
+		return viewModel;
+	};
+
+	self.currentScreen = new ko.observable('');
 
 	self.isCodeVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.CODE;
@@ -21,7 +37,10 @@ function AppViewModel() {
 		return self.currentScreen() == SCREEN_TYPE.CHOOSE;
 	};
 
-	self.setScreen = function(screen) {
-		self.currentScreen(screen);
+	self.setScreen = function(screen, optData) {
+		var viewModel = screenTypeToVM(screen);
+		viewModel.onSwitchTo(function() {
+			self.currentScreen(screen);
+		}, optData);
 	};
 }

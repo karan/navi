@@ -1,7 +1,8 @@
 var User = require('./../models/user');
 var Problem = require('./../models/problem');
 var ProblemSession = require('./../models/problemsession');
-var getOnlineFriends = require('./../helpers/friends');
+var Friends = require('./../helpers/friends');
+var request = require('request');
 
 exports.index = function (req, res){
   if (req.isAuthenticated()) {
@@ -39,9 +40,9 @@ function getFriends(user, callback) {
   request('https://graph.facebook.com/me/friends?limit=1000&access_token=' + user.accessToken,
     function(err, resp, body) {
       body = JSON.parse(body);
-      user.friends = body.friends.data;
-      user.save(function(err, user) {
-        callback(user);
+      user.friends = body.data;
+      user.save(function(err, newUser) {
+        callback(newUser);
       });
     });
 }
@@ -53,34 +54,45 @@ function nextRandomProblem(callback) {
 }
 
 
-function processAndServePs(req, friends, randProblem) {
+function processAndServePs(reqUser, friends, randProblem, callback) {
+  var ps = {};
+  var processed = false;
+
   for (var i = 0; i < friends.length; i++) {
+    console.log("looping - " + i);
     var thisFriend = friends[i];
-    User.findOne({fbId: thisFriend.id}, function(err, thisFriend) {
-      if (thisFriend) {
-        ProblemSession.find({ $or:[ 
-            {problem: randProblem.problem, user1: req.user._id, user2: thisFriend._id}, 
-            {problem: randProblem.problem, user1: thisFriend._id, user2: req.user._id}
+//    User.findOne({fbId: thisFriend.fbId}, function(err, thisFriend) {
+      if (thisFriend.fbId !== reqUser.fbId) {
+        ProblemSession.findOne({ $or:[ 
+            {problem: randProblem._id, user1: reqUser._id, user2: thisFriend._id}, 
+            {problem: randProblem._id, user1: thisFriend._id, user2: reqUser._id}
           ]}, function(err, ps) {
+            console.log("found ps = " + ps);
             // ps is the problem session where both users solved this problem
             if (!ps) {
               new ProblemSession({
                 problem: randProblem._id,
-                user1: req.user._id,
+                user1: reqUser._id,
                 user2: thisFriend._id
               }).save(function(err, newPS) {
-                return res.send({
-                  'problem': randProblem,
-                  'users': [req.user, thisFriend],
-                  'problemsession': newPS._id
-                });
+                console.log("new ps saved = " + newPS);
+
+                ps = {'problem': randProblem,
+                      'users': [reqUser, thisFriend],
+                      'problemsession': newPS._id};
+                processed = true;
+                if (processed || i === friends.length - 1) {
+                  console.log("ending");
+                  callback(ps);
+                }
               });
+            } else {
+              callback({});
             }
         });
       }
-    });
+    // });
   }
-  return res.send({});  // no user to match with
 }
 
 
@@ -90,19 +102,32 @@ exports.startSession = function(req, res) {
   if (option === 'friend') {
 
     getFriends(req.user, function(user){
-      getOnlineFriends(user.friends, function(friends) {
+      Friends.getOnlineFriends(user.friends, function(friends) {
+        // friends are users who are signed up, online and friends
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
-          return processAndServePs(req, friends, randProblem);
+          // DEBUG
+          randProblem = {'problem': 'abc', '_id': '123'};
+          // DEBUG
+          processAndServePs(req.user, friends, randProblem, function(ps) {
+            console.log("in cb = " + ps);
+            return res.send(ps);
+          });
         });
       });
     });
 
   } else {
 
-    User.find({}, function(users){
+    User.find({}, function(err, users) {
+      console.log("user; " + users.length);
       nextRandomProblem(function(randProblem) {
-        return processAndServePs(req, users, randProblem);
+        // DEBUG
+        randProblem = {'problem': 'abc', '_id': '123'};
+        // DEBUG
+        processAndServePs(req.user, users, randProblem, function(ps) {
+          return res.send(ps);
+        });
       });
     });
 

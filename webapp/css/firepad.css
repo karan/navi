@@ -94,7 +94,7 @@ pre.firepad-lt-o, pre.firepad-lt-u, pre.firepad-lt-t, pre.firepad-lt-tc {
   width: 20px;
 }
 
-.powered-by-firepad {
+/* .powered-by-firepad {
   position: absolute;
   display: block;
   z-index: 5;
@@ -108,7 +108,7 @@ pre.firepad-lt-o, pre.firepad-lt-u, pre.firepad-lt-t, pre.firepad-lt-tc {
 
 .powered-by-firepad:hover {
   opacity: 1;
-}
+} */
 
 .firepad-btn-group {
   margin: 5px 7px 0 0;

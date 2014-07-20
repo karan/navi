@@ -1,0 +1,42 @@
+body {
+	background: #2a2c2b;
+	margin: 0;
+	padding: 0;
+	color: #ecf0f1;
+}
+
+.console-text {
+	font-family: "Courier New", Courier, monospace;
+}
+
+.center-logo {
+	width: 450px;
+	margin: 0 auto;
+	display: block;
+	margin-top: 200px;
+}
+
+.tagline {
+	width: 450px;
+	display: block;
+	margin: 0 auto;
+	font-weight: bold;
+	margin-top: 20px;
+	font-size: 1.20em;
+}
+
+.fb-button {
+	background-image: url("../img/login-facebook.png");
+	background-repeat: no-repeat;
+	cursor: pointer;
+	width: 275px;
+	height: 59px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25px;
+}
+
+#logo-cursor {
+	width: 20px;
+	text-align: center;
+}

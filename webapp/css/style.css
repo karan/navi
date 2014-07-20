@@ -1,15 +1,55 @@
-html, body, #app, #code, #firepad-container {
+html, body, #app, #code {
   height: 100%;
 }
 
-.firepad, #firepad-container {
+html, body {
+  margin: 0;
+  min-width: 800px;
+  min-height: 400px;
+}
+
+#firepad-container {
+  width: 66.67%;
+  min-width: 500px;
+  height: 92%;
+  float: left;
+}
+
+#chat {
+  width: 33.33%;
+  height: 92%;
+  background-color: #272C3D;
+  float: left;
+}
+
+#navi-header {
+  height: 44px;
   width: 100%;
+  background-color: #0d0e0f;
+}
+
+#code-bottom-bar {
+  height: 8%;
+  min-height: 44px;
+  clear: both;
+  width: 100%;
+}
+
+#code-tests {
+  width: 66.67%;
   height: 100%;
+  background-color: #0d0e0f;
+  float: left;
+}
+
+#chat-input {
+  width: 33.33%;
+  height: 100%;
+  background-color: red;
+  float: left;
 }
 
 .CodeMirror {
-  background-color: #f62;
-  border: 1px solid #eee;
   height: auto;
 }
 

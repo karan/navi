@@ -7,18 +7,20 @@
 //   console.log('friends:');
 //   console.log(friends);
 // });
+
+var User = require('./../models/user');
+
 module.exports.getOnlineFriends = function (friends, cb) {
   // Get all online users
-  var User = require('../models/user');
-  User.find({ online: true }, function (users) {
+  User.find({ online: true }, function (err, users) {
     var onlineFriends = [];
     for (var i in users) {
       var user = users[i];
-      var userId = user.id;
+      var userId = user.fbId;
 
       var isFriend = false;
       for (var j in friends) {
-        var friend = friend[j];
+        var friend = friends[j];
         var friendId = friend.id;
         if (userId === friendId) {
           isFriend = true;
