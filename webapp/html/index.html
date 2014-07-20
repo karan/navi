@@ -2,15 +2,18 @@
 <html>
 	<head>
 		<title>Navi</title>
+		<link rel="icon" type="image/png" href="../img/favicon.png" />
+		<link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../css/codemirror.css">
 		<link rel="stylesheet" href="../css/firepad.css">
-		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
 		<div id="app">
 			<!-- CODING SCREEN -->
 			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code">
-				<h1 data-bind="text: header"></h1>
+				<div id="firepad-container"></div>
 			</div>
 
 			<!-- CHOOSE SCREEN -->
@@ -24,17 +27,14 @@
 			</div>
 		</div>
 
-		<!-- Init -->
+		<!-- Libraries -->
 	  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	  <script src="/socket.io/socket.io.js"></script>
-		<script src="../js/jsandbox.min.js"></script>
-		<script src="../js/init.js"></script>
-
-		<!-- Libraries -->
-		<link rel="jsandbox" href="../js/jsandbox-worker.min.js" />
 		<script src="../js/knockout-3.1.0.js"></script>
 		<script src="../js/firebase.min.js"></script>
-		<script src="../js/ace.js"></script>
+		<script src="../js/codemirror.js"></script>
+		<script src="../js/codemirror-js.js"></script>
+		<script src="../js/firepad.min.js"></script>
 
 		<!-- Models -->
 		<script src="../js/model.screentype.js"></script>
@@ -48,7 +48,6 @@
 		<script src="../js/viewmodel.app.js"></script>
 
 		<!-- Init -->
-		<script src="../js/jsandbox.min.js"></script>
-		<script src="../js/init.js"></script>
+		<script type="text/javascript" src="../js/init.js"></script>
 	</body>
 </html>
