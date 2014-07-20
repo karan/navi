@@ -3,7 +3,7 @@ function Tester() {
 	var code = null;
 
 	var START_FUNCTION = '(function test() {';
-    var RETURN = ' return ';
+  var RETURN = ' return ';
 	var END_FUNCTION = '})();';
 
 	var makeCode = function(test) {
