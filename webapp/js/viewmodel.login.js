@@ -1,21 +1,13 @@
 function LoginViewModel() {
 	var self = this;
 
-	var blinkShow = false;
-	var blinkCursor = function() {
-		blinkShow = !blinkShow;
-		if(blinkShow) {
-			document.getElementById('blink').style.display = 'inline-block';
-		} else {
-			document.getElementById('blink').style.display = 'none';
-		}
-		setTimeout(blinkCursor, 500);
-	};
+	var cursor = new Blinker('logo-cursor', 500);
 
 	self.login = function() {
 		// TODO: implement actual login
 		// 
-		app.setScreen(SCREEN_TYPE.CODE);
+		cursor.stop();
+		app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM});
 	}
 
 	self.onSwitchTo = function(done) {
@@ -24,5 +16,5 @@ function LoginViewModel() {
 		done();
 	};
 
-	blinkCursor();
+	cursor.start();
 }

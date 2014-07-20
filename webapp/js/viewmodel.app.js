@@ -23,7 +23,7 @@ function AppViewModel() {
 		return viewModel;
 	};
 
-	self.currentScreen = new ko.observable(SCREEN_TYPE.LOGIN);
+	self.currentScreen = new ko.observable('');
 
 	self.isCodeVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.CODE;
@@ -37,10 +37,10 @@ function AppViewModel() {
 		return self.currentScreen() == SCREEN_TYPE.CHOOSE;
 	};
 
-	self.setScreen = function(screen) {
+	self.setScreen = function(screen, optData) {
 		var viewModel = screenTypeToVM(screen);
 		viewModel.onSwitchTo(function() {
 			self.currentScreen(screen);
-		});
+		}, optData);
 	};
 }

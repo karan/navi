@@ -1,4 +1,4 @@
-function FirePad() {
+function FirePad(callbackVM) {
 	var self = this;
 
 	var ref = new Firebase('https://crackling-fire-3374.firebaseio.com/navi/room/1');
@@ -15,6 +15,7 @@ function FirePad() {
 		if (firepad.isHistoryEmpty()) {
 			firepad.setText('some initial text...');
 		}
+		callbackVM();
 	});
 
 	self.getCode = function() {
