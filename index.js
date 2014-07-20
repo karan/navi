@@ -74,9 +74,8 @@ io.sockets.on('connection', function (socket) {
 
   // Sets up the user data
   socket.on('sessionConnected', function (game) {
-    console.log("connecting to other person");
+    console.log("connecting to other person " + game.problemsession);
     ProblemSession.findById(game.problemsession, function(err, ps) {
-      console.log(JSON.stringify(ps));
       if (!ps.connected) {
         console.log("emit to client");
         socket.broadcast.emit('connectOther', game);
