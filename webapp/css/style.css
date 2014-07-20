@@ -29,7 +29,7 @@ html, body {
   margin-left: 10px;
 }
 
-#navi-header-profile {
+.navi-header-profile {
   float: right;
   margin-right: 10px;
   width: 35px;

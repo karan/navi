@@ -38,7 +38,8 @@
 				<div id="chat">
 					<div id="navi-header">
 						<img src="../img/logo-small.png" id="navi-header-image">
-						<img data-bind="attr: {src: $root.getProfilePictureSrc()}" id="navi-header-profile">
+						<img data-bind="attr: {src: $root.getProfilePictureSrc()}" class="navi-header-profile">
+						<img data-bind="attr: {src: friendUrl}" class="navi-header-profile">
 						<img data-bind="click: onClickBack" class="navi-back-button" src="../img/back.png">
 					</div>
 					<div id="firechat-container"></div>

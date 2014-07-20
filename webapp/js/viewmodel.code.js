@@ -40,6 +40,7 @@ function CodeViewModel() {
 	self.currentProblem = new ko.observable();
 	self.tester = new Tester();
 	self.runningTests = new ko.observable(false);
+	self.friendUrl = new ko.observable('');
 
 	self.onRunTestsClick = function() {
 		if(!self.runningTests()) {
@@ -47,6 +48,10 @@ function CodeViewModel() {
 			app.getSocket().emit('runTests', game, app.getUser()._id);
 			self.runTester();
 		}
+	};
+
+	var getFriendProfilePictureSrc = function() {
+		return 'http://graph.facebook.com/' + game.users[1].fbId + '/picture?type=large&width=100&height=100';
 	};
 
 	self.runTester = function() {
@@ -78,6 +83,7 @@ function CodeViewModel() {
 		console.log("SWITCHING TO CODE VIEW");
 		roomId = info.game.problemsession;
 		game = info.game;
+		self.friendUrl(getFriendProfilePictureSrc());
 		if (roomId && game) {
 			if (info.type == MODE.FRIENDS) {
 				setUpFriend(function(problem) {
