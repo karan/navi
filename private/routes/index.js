@@ -94,10 +94,11 @@ exports.startSession = function(req, res) {
         // friends are users who are signed up, online and friends
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
+          // DEBUG
           randProblem = {'problem': 'abc', '_id': '123'};
+          // DEBUG
           processAndServePs(req.user, friends, randProblem, function(ps) {
             if (ps) {
-              console.log("callback called");
               return res.send(ps);
             } else {
               return res.send({});
@@ -112,9 +113,11 @@ exports.startSession = function(req, res) {
     User.find({}, function(err, users) {
       console.log("user; " + users.length);
       nextRandomProblem(function(randProblem) {
+        // DEBUG
+        randProblem = {'problem': 'abc', '_id': '123'};
+        // DEBUG
         processAndServePs(req.user, users, randProblem, function(ps) {
           if (ps) {
-            console.log("callback called");
             return res.send(ps);
           } else {
             return res.send({});
