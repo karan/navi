@@ -89,9 +89,8 @@ function savePs(randProblem, reqUser, thisFriend, callback) {
 
 function processAndServePs(reqUser, friends, randProblem, callback) {
   (function checkOne() {
-    var thisFriend = friends.splice(0, 1)[0]; // get the first record of coll and reduce coll by one
+    var thisFriend = friends.splice(0, 1)[0];
     if (thisFriend.id !== reqUser.id) {
-      console.log("after if: " + thisFriend.id);
       commonPs(reqUser, thisFriend, randProblem, function(ps) {
           // ps is the problem session where both users solved this problem
           if (!ps) {
