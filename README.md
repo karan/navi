@@ -39,3 +39,9 @@ User:
 `/user`
 
 Returns logged in user (see JSON above)
+
+#### Get the next random problem
+
+`/next_problem`
+
+JSON includes, the `problem` and a list of `tests` where `input` has the test code and `solution` has the expected output.
