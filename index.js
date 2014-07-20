@@ -68,7 +68,7 @@ var server = http.createServer(app);
 // Connect to socket
 var io = require('socket.io')(server);
 io.on('connection', function() {
-  console.log('connected');
+  console.log('connected to socket.io');
 });
 
 server.listen(app.get('port'), function(){
