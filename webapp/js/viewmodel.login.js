@@ -4,10 +4,7 @@ function LoginViewModel() {
 	var cursor = new Blinker('logo-cursor', 500);
 
 	self.login = function() {
-		// TODO: implement actual login
-		// 
-		cursor.stop();
-		app.setScreen(SCREEN_TYPE.CHOOSE);
+		window.location = '/auth/facebook';
 	}
 
 	self.onSwitchTo = function(done) {
