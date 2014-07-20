@@ -166,17 +166,17 @@ exports.finalizeSession = function(req, res) {
     problemSession.user_solution = user_solution;
     problemSession.save(function(err, ps) {
       if (err) res.send(500);
-      User.find({'id': { $in: [ps.user1, ps.user2]}}, function(err, docs) {
-        console.log(docs);
+      User.findById(ps.user1, function(err, user1) {
         if (err) res.send(500);
-        docs[0].score += score;
-        docs[1].score += score;
-        docs[0].save(function(err, u) {
+        User.findById(ps.user2, function(err, user2) {
           if (err) res.send(500);
-          docs[1].save(function(err, e) {
-            if (err) res.send(500);
-            res.send(200);
-          });
+          user1.score += score;
+          user2.score += score;
+          user1.save(function(err, u) {
+            user2.save(function(err, u) {
+              res.send(200, 'ok')
+            })
+          })
         });
       });
     });
