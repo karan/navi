@@ -12,7 +12,7 @@ var RedisStore = require('connect-redis')(express);
 var redis;
 
 if (Constants.REDISTOGO_URL) {
-  console.log("using reditogo");
+  console.log("using redistogo");
   rtg   = require('url').parse(Constants.REDISTOGO_URL);
   redis = require('redis').createClient(rtg.port, rtg.hostname);
   redis.auth(rtg.auth.split(':')[1]); // auth 1st part is username and 2nd is password separated by ":"

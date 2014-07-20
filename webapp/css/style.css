@@ -32,6 +32,10 @@ html, body {
 #navi-header-profile {
   float: right;
   margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  margin-top: 3px;
+  border-radius: 100%
 }
 
 #chat {
