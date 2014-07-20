@@ -7,11 +7,12 @@
   font-family:'Menlo', 'Consolas', "Vera Mono", monospace;
   font-size:14px;
 }
-.cm-s-tomorrow-night.CodeMirror {background: #1d1f21; color: #c5c8c6}
+.cm-s-tomorrow-night.CodeMirror {background: #1d1f21; color: #c5c8c6; line-height: 150%; }
+.cm-s-tomorrow-night.CodeMirror pre {padding-left: 10px;}
 .cm-s-tomorrow-night div.CodeMirror-selected { background: #373b41 !important; }
 .cm-s-tomorrow-night .CodeMirror-gutters { background: #1d1f21; border-right: none; }
 .cm-s-tomorrow-night .CodeMirror-gutter-text { color: gray; }
-.cm-s-tomorrow-night .CodeMirror-cursor { border-left: 1px solid white !important; }
+.cm-s-tomorrow-night .CodeMirror-cursor { border-left: 1px solid #999 !important; }
 .cm-s-tomorrow-night span.cm-comment, .cm-s-tomorrow-night span.cm-meta { color: #969896; }
 .cm-s-tomorrow-night span.cm-atom, .cm-s-tomorrow-night span.cm-number { color: #c5c8c6; }
 .cm-s-tomorrow-night span.cm-property, .cm-s-tomorrow-night span.cm-attribute { color: #8abeb7 }
@@ -20,3 +21,4 @@
 .cm-s-tomorrow-night span.cm-builtin, .cm-s-tomorrow-night span.cm-minus { color: #cc6666 }
 .cm-s-tomorrow-night span.cm-variable,.cm-s-tomorrow-night span.cm-variable-2, .cm-s-tomorrow-night span.cm-variable-3, .cm-s-tomorrow-night span.cm-tag, .cm-s-tomorrow-night span.cm-rangeinfo { color: #81a2be }
 .cm-s-tomorrow-night span.cm-special { color: #f0c674; }
+.cm-s-tomorrow-night .CodeMirror-linenumber {color: #444;}

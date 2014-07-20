@@ -13,19 +13,15 @@ exports.index = function (req, res){
   }
 };
 
-
 exports.authError = function(req, res) {
   res.redirect('/');
 };
-
 
 exports.authSuccess = function(req, res) {
   res.redirect('/');
 };
 
-
 // Main functions
-
 
 // get details for logged in user
 exports.getUser = function(req, res) {
@@ -34,8 +30,22 @@ exports.getUser = function(req, res) {
   } else {
     return res.send(401, {});
   }
-}
+};
 
+exports.getProblem = function(req, res) {
+  if (req.isAuthenticated()) {
+    ProblemSession.findOne({
+      $or: [
+        {user1: req.user.id},
+        {user1: req.user.id}
+      ]
+    }).sort('-created_at').exec(function (problem) {
+      res.send(problem);
+    });
+  } else {
+    res.send(401, {});
+  }
+};
 
 function getFriends(user, callback) {
   request('https://graph.facebook.com/me/friends?limit=1000&access_token=' + user.accessToken,
@@ -141,7 +151,7 @@ exports.startSession = function(req, res) {
     });
 
   }
-  
+
 }
 
 

@@ -12,11 +12,12 @@ function FirePad(callbackVM) {
 	var firepad = Firepad.fromCodeMirror(ref, codeMirror);
 
 	firepad.on('ready', function() {
-		if (firepad.isHistoryEmpty()) {
-			firepad.setText('some initial text...');
-		}
 		callbackVM();
 	});
+
+	self.setCode = function(code) {
+		firepad.setText(code);
+	};
 
 	self.getCode = function() {
 		return firepad.getText();

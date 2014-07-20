@@ -3,6 +3,8 @@ function Test() {
 
 	var expected = null;
 	var expression = null;
+	
+	self.fails = new ko.observable(true);
 
 	self.setTestExpression = function(exp) {
 		expression = exp;

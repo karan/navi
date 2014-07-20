@@ -24,14 +24,11 @@
 				</div>
 				<div id="code-bottom-bar">
 					<div id="code-tests">
-						<div id="test-fail"></div>
-						<div id="test-pass"></div>
-						<div id="test-pass"></div>
-						<div id="test-pass"></div>
-						<div id="test-fail"></div>
-						<div id="test-pass"></div>
-						<div id="test-fail"></div>
-						<button id="submit-button">Submit</button>
+						<div class="test-row" data-bind="foreach: tester.tests">
+							<div id="test-fail" data-bind="visible: fails()"></div>
+							<div id="test-pass" data-bind="visible: !fails()"></div>
+						</div>
+						<button id="submit-button" data-bind="click: runTests">Submit</button>
 					</div>
 					<div id="chat-input">
 						<input type="text" id="chat-input-box">
@@ -47,7 +44,7 @@
 						<span id="choose-title-cursor" style="display: none;">█</span>
 					</span>
 				</h2>
-				<div class="choice-buttons" data-bind="visible: !isShowingFriends()">
+				<div class="choice-buttons" data-bind="visible: isShowingChoices()">
 					<div class="btn btn-purple" data-bind="click: onClickFriends">With Friend</div>
 					<div class="btn btn-yellow left-space" data-bind="click: onClickRandom">Random</div>
 				</div>
@@ -80,6 +77,7 @@
 		<script src="../js/model.mode.js"></script>
 		<script src="../js/model.blinker.js"></script>
 		<script src="../js/model.typer.js"></script>
+		<script src="../js/model.problembank.js"></script>
 		<script src="../js/model.facebook.js"></script>
 		<script src="../js/model.firepad.js"></script>
 		<script src="../js/model.test.js"></script>
