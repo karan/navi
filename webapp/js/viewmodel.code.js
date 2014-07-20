@@ -1,6 +1,7 @@
 function CodeViewModel() {
 	var self = this;
 	var firePad = null;
+	var fireChat = null;
 	var problemBank = new ProblemBank();
 
 	var setUpFirePad = function(done, problem) {
@@ -63,4 +64,8 @@ function CodeViewModel() {
 			throw {name: 'FatalError', message: 'Unsupport mode'};
 		}
 	};
+
+	self.sendMessage = function(model, event) {
+		event.currentTarget.value = '';
+	}
 }

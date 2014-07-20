@@ -33,7 +33,7 @@
 						<button id="submit-button" data-bind="click: runTests">Submit</button>
 					</div>
 					<div id="chat-input">
-						<input type="text" id="chat-input-box">
+						<input type="text" id="chat-input-box" data-bind="event: {change: sendMessage}">
 					</div>
 				</div>
 			</div>
