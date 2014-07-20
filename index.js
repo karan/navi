@@ -83,12 +83,15 @@ io.sockets.on('connection', function (socket) {
 
 
   // Sets up the user data
-  socket.on('sessionConnected', function (game) {
+  socket.on('sessionConnected', function (game, mode) {
     console.log("connecting to other person " + JSON.stringify(game));
     ProblemSession.findById(game.problemsession, function(err, ps) {
       if (!ps.connected) {
         console.log("emit to other client");
-        io.sockets.in(ps.user2).emit('connectToGame', game);
+        io.sockets.in(ps.user1).emit('connectToGame', game, mode);
+        setTimeout(function() {
+          io.sockets.in(ps.user1).emit('connectToGame', game, mode);
+        }, 500);
       }
     });
   });
