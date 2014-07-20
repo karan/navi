@@ -2,6 +2,10 @@ html, body, #app, #code {
   height: 100%;
 }
 
+input:focus, *:focus {
+  outline: 0;
+}
+
 html, body {
   margin: 0;
   min-width: 800px;
@@ -11,7 +15,7 @@ html, body {
 #firepad-container {
   width: 66.67%;
   min-width: 500px;
-  height: 92%;
+  height: 100%;
   float: left;
 }
 
@@ -19,7 +23,9 @@ html, body {
   line-height: 44px;
 }
 
-#navi-header-text {
+#navi-header-image {
+  height: 23px;
+  margin-top: 10px;
   margin-left: 10px;
 }
 
@@ -30,10 +36,28 @@ html, body {
 
 #chat {
   width: 33.33%;
-  height: 92%;
+  height: 100%;
   background-color: #272C3D;
   float: left;
   overflow: scroll;
+}
+
+#chat-input {
+  width: 33.33%;
+  height: 100%;
+  background-color: #151618;
+  float: left;
+  text-align: center;
+}
+
+#chat-input-box {
+  border: none;
+  background-color: #25272a;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 13px;
+  padding: 7px;
 }
 
 .chat-name-one {
@@ -59,9 +83,10 @@ html, body {
 }
 
 #code-bottom-bar {
-  height: 8%;
-  min-height: 44px;
-  clear: both;
+  height: 44px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
   width: 100%;
 }
 
@@ -70,6 +95,7 @@ html, body {
   height: 100%;
   background-color: #151618;
   float: left;
+  line-height: 51px;
 }
 
 #submit-button {
@@ -90,13 +116,6 @@ html, body {
 	font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-#chat-input {
-  width: 33.33%;
-  height: 100%;
-  background-color: #151618;
-  float: left;
-}
-
 .CodeMirror {
   height: auto;
 }
@@ -111,6 +130,7 @@ html, body {
   width: 15px;
   height: 15px;
   display: inline-block;
+  margin-left: 13px;
 }
 
 #test-fail {
