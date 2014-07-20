@@ -119,6 +119,14 @@ html, body {
   background-color: #272C3D;
 }
 
+#submit-button:hover {
+  background-color: #202533;
+}
+
+#submit-button:active {
+  background-color: #1a1d28;
+}
+
 .CodeMirror {
   height: auto;
 }
