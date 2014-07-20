@@ -35,11 +35,11 @@ function FireChat(roomId, info, callbackVM) {
             firechat.enterRoom(self.roomRoomId);
           });
         } else {
-          firechat.getRoomList(function(r) {
+          setTimeout(firechat.getRoomList(function(r) {
             console.log(r);
             self.roomRoomId = Object.keys(r)[0];
             firechat.enterRoom(self.roomRoomId);
-          });
+          }), 500);
         }
       });
     } else {
