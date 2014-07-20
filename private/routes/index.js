@@ -3,6 +3,7 @@ var Problem = require('./../models/problem');
 var ProblemSession = require('./../models/problemsession');
 var Friends = require('./../helpers/friends');
 var request = require('request');
+var async = require('async');
 
 
 exports.index = function (req, res){
@@ -26,7 +27,13 @@ exports.authSuccess = function(req, res) {
 // get details for logged in user
 exports.getUser = function(req, res) {
   if (req.isAuthenticated()) {
-    return res.send(200, req.user);
+    ProblemSession.find({ $or:[ {user1: req.user.id}, {user2: req.user.id} ]}, 
+      function(err, ps) {
+        req.user.problems_solved = ps.length;
+        req.user.save(function(err, u) {
+          return res.send(200, u);
+        });
+    });
   } else {
     return res.send(401, {});
   }
@@ -181,6 +188,16 @@ exports.setOnline = function (userId, isOnline, callback) {
 // get all users for the leaderboard
 exports.leaderboard = function(req, res) {
   User.find({}, function(err, users) {
-    res.send(200, users);
+    async.mapLimit(users, 20, function(user, cb) {
+      ProblemSession.find({ $or:[ {user1: user.id}, {user2: user.id} ]}, 
+        function(err, ps) {
+          user.problems_solved = ps.length;
+          user.save(function(err, u) {
+            cb(null, u);
+          });
+      });
+    }, function (err, results) {
+      res.send(200, results);
+    });
   });
 }

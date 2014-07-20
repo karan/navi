@@ -54,6 +54,7 @@ app.get('/auth/error', routes.authError);
 
 // user
 app.get('/user', routes.getUser);  // get logged in user
+app.get('/leaderboard', routes.leaderboard);
 
 // session
 // start a session
