@@ -13,7 +13,7 @@ var problemSchema = new Schema({
     default: Date.now
   },
   problem: String,
-  tests: [String]  // list of {input: '', output: ''}
+  tests: [Object]  // list of {input: '', output: ''}
 });
 
 

@@ -7,7 +7,7 @@ var request = require('request');
 
 exports.index = function (req, res){
   if (req.isAuthenticated()) {
-    return res.render('index', {user: req.user});
+    return res.render('index', {user: req.user, userString: JSON.stringify(req.user)});
   } else {
     return res.render('index');
   }
@@ -123,6 +123,7 @@ exports.startSession = function(req, res) {
     getFriends(req.user, function(user){
       Friends.getOnlineFriends(user.friends, function(friends) {
         // friends are users who are signed up, online and friends
+        friends = require('./../helpers/shuffle').shuffle(friends);
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
           // DEBUG
@@ -139,7 +140,8 @@ exports.startSession = function(req, res) {
   } else {
 
     User.find({}, function(err, users) {
-      console.log("user; " + users.length);
+      users = require('./../helpers/shuffle').shuffle(users);
+      console.log("users =  " + users.length);
       nextRandomProblem(function(randProblem) {
         // DEBUG
         randProblem = {'problem': 'abc', 'id': '123'};
