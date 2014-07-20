@@ -30,7 +30,7 @@ function FireChat(roomId, info, callbackVM) {
   var simpleLogin = new FirebaseSimpleLogin(ref, function(err, user) {
     if (user) {
       self.firechat.setUser(user.id, app.getUser().name, function(user) {
-        if (self.isPlayerOne()) {
+        if (self.isPlayerOne(user.name)) {
           firechat.createRoom('room', 'public', function(r) {
             self.roomRoomId = r;
             firechat.enterRoom(self.roomRoomId);
