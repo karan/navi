@@ -68,13 +68,16 @@ var server = http.createServer(app);
 // Connect to socket
 var io = require('socket.io')(server);
 var ProblemSession = require('./private/models/problemsession');
-var clients = {};
+var User = require('./private/models/user');
 
 io.sockets.on('connection', function (socket) {
 
   socket.on('joinRoom', function(room) {
     console.log("connecting to room " + room);
     socket.join(room);
+    User.findById(room, function(err, u) {
+      socket.user = u;
+    });
   });
 
 
@@ -87,6 +90,13 @@ io.sockets.on('connection', function (socket) {
         io.sockets.in(ps.user2).emit('connectToGame', game);
       }
     });
+  });
+
+  socket.on('disconnect', function () {
+    var userData = socket.user;
+    if (userData) {
+      routes.setOnline(userData._id, false);
+    }
   });
 
 });

@@ -169,6 +169,15 @@ exports.finalizeSession = function(req, res) {
 }
 
 
+exports.setOnline = function (userId, isOnline, callback) {
+  User.update({'_id' : userId}, {online: isOnline}, function () {
+    if (callback) {
+      callback();
+    }
+  });
+};
+
+
 // get all users for the leaderboard
 exports.leaderboard = function(req, res) {
   User.find({}, function(err, users) {
