@@ -96,7 +96,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function () {
     var userData = socket.user;
-    console.log("disconnect " + userData._id);
+    console.log("disconnect " + userData);
     if (userData) {
       routes.setOnline(userData._id, false);
     }
