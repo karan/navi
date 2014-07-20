@@ -1,4 +1,8 @@
 function LoginViewModel() {
 	var self = this;
-	self.header = new ko.observable('Login Page');
+	self.login = function() {
+		// TODO: implement actual login
+		// 
+		app.setScreen(SCREEN_TYPE.CODE);
+	}
 }

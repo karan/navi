@@ -1,6 +1,6 @@
 function Problem(json) {
 	var self = this;
-	self.description = ko.observable(json.description);
+	self.title = ko.observable(json.title);
 	self.starterCode = json.starterCode;
 	self.tests = [];
 	for(var i = 0; i < json.tests.length; i++) {
