@@ -1,8 +1,18 @@
+@font-face {
+	font-family: Ostrich;
+	font-weight: bold;
+	src: url("../font/OstrichSans-Black.otf") format("opentype");
+}
+
 body {
 	background: #2a2c2b;
 	margin: 0;
 	padding: 0;
-	color: #ecf0f1;
+	color: #bdc3c7;
+}
+
+.purple {
+	color: #b280c7;
 }
 
 .console-text {
@@ -36,7 +46,46 @@ body {
 	margin-top: 25px;
 }
 
-#logo-cursor {
-	width: 20px;
+.cursor-holder {
+	width: 10px;
+	display: inline-block;
 	text-align: center;
+}
+
+.center-title {
+	width: 100%;
+	text-align: center;
+	margin-top: 200px
+}
+
+.choice-buttons {
+	width: 100%;
+	text-align: center;
+	height: 50px;
+}
+
+.left-space {
+	margin-left: 30px;
+}
+
+.btn {
+	padding: 30px;
+	font-weight: bold;
+	font-family: Ostrich;
+	font-size: 2em;
+	display: inline-block;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+.btn-yellow {
+	background: #f1c40f;
+	color: #2a2c2b;
+}
+
+.btn-purple {
+	background: #b280c7;
+	color: #2a2c2b;
 }
