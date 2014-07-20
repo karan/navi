@@ -53,7 +53,7 @@ app.get('/auth/facebook/callback',
 app.get('/auth/error', routes.authError);
 
 app.get('/user', routes.getUser);
-app.get('/next_problem', auth.requiresLogin, routes.nextProblem);
+app.get('/start', auth.requiresLogin, routes.startSession);
 
 app.get('/leaderboard', routes.leaderboard);
 

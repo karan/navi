@@ -2,6 +2,7 @@ var User = require('./../models/user');
 var Problem = require('./../models/problem');
 var ProblemSession = require('./../models/problemsession');
 
+
 exports.index = function (req, res){
   if (req.isAuthenticated()) {
     return res.render('index', {user: req.user});
@@ -10,15 +11,19 @@ exports.index = function (req, res){
   }
 };
 
+
 exports.authError = function(req, res) {
   res.redirect('/');
 };
+
 
 exports.authSuccess = function(req, res) {
   res.redirect('/');
 };
 
+
 // Main functions
+
 
 // get details for logged in user
 exports.getUser = function(req, res) {
@@ -29,13 +34,56 @@ exports.getUser = function(req, res) {
   }
 }
 
-// return next thing for the passed language
-exports.nextProblem = function(req, res) {
+
+function getFriends(accessToken, callback) {
+  request('https://graph.facebook.com/me/friends?limit=1000&access_token='+accessToken,
+    function(err, resp, body) {
+      body = JSON.parse(body);
+      callback(body.friends.data);
+    });
+}
+
+function nextRandomProblem(callback) {
   Problem.find({}, function(err, docs) {
-    if (err) return res.send(500);
-    res.send(200, docs[Math.floor(Math.random()*docs.length)]);
+    callback(docs[Math.floor(Math.random()*docs.length)]);
   });
 }
+
+
+exports.startSession = function(req, res) {
+  getOnlineFriends(function(friends) {
+    console.log("got friends = " + friends.length);
+    nextRandomProblem(function(randProblem) {
+      for (var i = 0; i < friends.length; i++) {
+        var thisFriend = friends[i];
+        User.findOne({fbId: thisFriend.id}, function(err, thisFriend) {
+          if (thisFriend) {
+            ProblemSession.find({ $or:[ 
+              {problem: randProblem.problem, user1: req.user._id, user2: thisFriend._id}, 
+              {problem: randProblem.problem, user1: thisFriend._id, user2: req.user._id}
+              ]}, function(err, ps) {
+                // ps is the problem session where both users solved this problem
+                if (!ps) {
+                  new ProblemSession({
+                    problem: randProblem._id,
+                    user1: req.user._id,
+                    user2: thisFriend._id
+                  }).save(function(err, newPS) {
+                    res.send({
+                      'problem': randProblem,
+                      'users': [req.user, thisFriend],
+                      'problemsession': newPS._id
+                    });
+                  });
+                }
+            });
+          }
+        });
+      }
+    });
+  });
+}
+
 
 // submits the score for a thing
 exports.submitScore = function(req, res) {
@@ -58,6 +106,7 @@ exports.submitScore = function(req, res) {
   });
 
 }
+
 
 // get all users for the leaderboard
 exports.leaderboard = function(req, res) {
