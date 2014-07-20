@@ -1,8 +1,11 @@
 function FirePad() {
+	var self = this;
+
 	var ref = new Firebase('https://crackling-fire-3374.firebaseio.com/navi/room/1');
 
 	var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
 		lineNumbers: true,
+		theme: 'tomorrow-night-eighties',
 		mode: 'javascript'
 	});
 
@@ -13,4 +16,8 @@ function FirePad() {
 			firepad.setText('some initial text...');
 		}
 	});
+
+	self.getCode = function() {
+		return firepad.getText();
+	};
 }

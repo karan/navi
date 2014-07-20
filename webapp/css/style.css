@@ -1,15 +1,35 @@
-html, body, #app, #code, #firepad-container {
+html, body, #app, #code, .firepad {
   height: 100%;
 }
 
-.firepad, #firepad-container {
-  width: 100%;
+html, body {
+  margin: 0;
+  min-width: 800px;
+}
+
+#firepad-container {
+  width: 66.67%;
+  min-width: 500px;
   height: 100%;
+  float: left;
+}
+
+#chat {
+  width: 33.33%;
+  height: 100%;
+  background-color: #1a252f;
+  float: left;
+}
+
+#code-bottom-bar {
+  background-color: red;
+  position: absolute;
+  height: 40px;
+  width: 100%;
+  bottom: 0;
 }
 
 .CodeMirror {
-  background-color: #f62;
-  border: 1px solid #eee;
   height: auto;
 }
 
