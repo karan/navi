@@ -1,6 +1,5 @@
 function Tester() {
 	var self = this;
-	var tests = [];
 	var code = null;
 
 	var START_FUNCTION = '(function test() {';
@@ -10,7 +9,6 @@ function Tester() {
 
 
 	var makeCode = function(test) {
-		console.log(test);
 		return START_FUNCTION + 
 				code + 
 				RETURN +
@@ -18,21 +16,23 @@ function Tester() {
 				END_FUNCTION;
 	};
 
+	self.tests = new ko.observableArray([]);
+
 	self.setTests = function(newTests) {
-		tests = newTests;
+		for(var i = 0; i < newTests.length; i++) {
+			self.tests.push(newTests[i]);
+		}
 	};
 
 	self.clearTests = function() {
-		tests = [];
+		self.tests([]);
 	};
 
 	self.run = function() {
-		if (tests && code) {
-			var results = [];
+		if (self.tests() && code) {
 			for(var i = 0; i < tests.length; i++) {
-				results.push(eval(makeCode(tests[i])) == tests[i].getExpected());
+				self.tests()[i].fails(eval(makeCode(self.tests()[i])) == self.tests()[i].getExpected());
 			}
-			console.log(results);
 		}
 	};
 
