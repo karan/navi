@@ -10,7 +10,7 @@ html, body {
 #firepad-container {
   width: 66.67%;
   min-width: 500px;
-  height: 100%;
+  height: 90%;
   float: left;
 }
 
@@ -23,10 +23,10 @@ html, body {
 
 #code-bottom-bar {
   background-color: red;
-  position: absolute;
-  height: 40px;
+  /* position: absolute; */
+  height: 10%;
   width: 66.67%;
-  bottom: 0;
+  /* bottom: 0; */
 }
 
 .CodeMirror {
