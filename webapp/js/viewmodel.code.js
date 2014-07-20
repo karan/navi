@@ -98,7 +98,7 @@ function CodeViewModel() {
 	};
 
 	self.onConnectedToSocket = function() {
-		app.getSocket().on('runTests', self.onRunTests);
+		app.getSocket().on('runMyTests', self.onRunTests);
 	};
 
 
