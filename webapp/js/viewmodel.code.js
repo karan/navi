@@ -14,7 +14,7 @@ function CodeViewModel() {
 	};
 
 	var setUpFireChat = function(done, info) {
-		self.fireChat = new FireChat(info, function() {
+		self.fireChat = new FireChat(roomId, info, function() {
 			$('#code').slideDown('slow');
 			done();
 		});
