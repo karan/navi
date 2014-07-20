@@ -131,3 +131,27 @@ function manhattanDistance (p1, p2) {
 // manhattanDistance({ x: 1, y: 1}, { x: 1, y: 1 }) === 0
 // manhattanDistance({ x: 100, y: 3}, { x: 3, y: 0 }) === 100
 /////////////////////////////
+
+/////////////////////////////
+// Max Subsequence
+/////////////////////////////
+/**
+ * Given a sequence of n real numbers A(1) ... A(n),
+ * determine a contiguous subsequence A(i) ... A(j)
+ * for which the sum of elements in the subsequence is maximized.
+ *
+ * Return that sum.
+ */
+function maxSubsequence (a) {
+  // body...
+}
+/////////////////////////////
+function maxSubsequence (a) {
+  var maxsofar = 0;
+  var maxendinghere = 0;
+  for (var i = 0; i < a.length; ++i) {
+    maxendinghere = Math.max(maxendinghere + a[i], 0);
+    maxsofar = Math.max(maxsofar, maxendinghere);
+  }
+  return maxsofar;
+}
