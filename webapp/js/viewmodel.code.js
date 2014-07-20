@@ -70,6 +70,7 @@ function CodeViewModel() {
 	};
 
 	self.onSwitchTo = function(done, info) {
+		console.log("SWITCHING TO CODE VIEW");
 		roomId = info.game.problemsession;
 		if (roomId) {
 			if (info.type == MODE.FRIENDS) {

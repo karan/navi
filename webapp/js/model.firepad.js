@@ -12,6 +12,8 @@ function FirePad(roomId, callbackVM) {
 	var firepad = Firepad.fromCodeMirror(ref, codeMirror);
 
 	firepad.on('ready', function() {
+		console.log("FIREPAD READY");
+		console.log(firepad);
 		callbackVM();
 	});
 

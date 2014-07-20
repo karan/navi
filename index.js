@@ -90,7 +90,7 @@ io.sockets.on('connection', function (socket) {
         console.log("emit to other client");
         io.sockets.in(ps.user1).emit('connectToGame', game, mode);
         setTimeout(function() {
-          io.sockets.in(ps.user1).emit('connectToGame', game, mode);
+          io.sockets.in(ps.user2).emit('connectToGame', game, mode);
         }, 500);
       }
     });
