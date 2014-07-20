@@ -18,19 +18,19 @@ function ChooseViewModel() {
 		cursor.stop();
 		self.isShowingChoices(false);
 		self.title.write('Searching...', 50);
-		facebook.connectToRandom(function(partner) {
+		facebook.connectToRandom(function(game) {
 			self.title.write('Found! Loading...', 50);
-			app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'partner' : partner});
+			app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'game' : game});
 		});
 	};
 
 	self.onClickFriends = function() {
 		self.isShowingChoices(false);
 		self.title.write('Checking friends online now...', 50);
-		facebook.connectToFriend(function(friend) {
+		facebook.connectToFriend(function(game) {
 			if(friend) {
 				self.title.write('Found! Loading...', 50);
-				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'partner' : friend});
+				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {
 					cursor.stop();

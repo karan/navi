@@ -4,7 +4,8 @@ function AppViewModel() {
 	self.VM = {
 		code : new CodeViewModel(),
 		login : new LoginViewModel(),
-		choose : new ChooseViewModel()
+		choose : new ChooseViewModel(),
+		profile : new ProfileViewModel()
 	};
 
 	var screenTypeToVM = function(screen) {
@@ -18,6 +19,9 @@ function AppViewModel() {
 				break;
 			case SCREEN_TYPE.CHOOSE:
 				viewModel = self.VM.choose;
+				break;
+			case SCREEN_TYPE.PROFILE:
+				viewModel = self.VM.profile;
 				break;
 		}
 		return viewModel;
@@ -35,6 +39,10 @@ function AppViewModel() {
 
 	self.isChooseVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.CHOOSE;
+	};
+
+	self.isProfileVisible = function() {
+		return self.currentScreen() == SCREEN_TYPE.PROFILE;
 	};
 
 	self.setScreen = function(screen, optData) {

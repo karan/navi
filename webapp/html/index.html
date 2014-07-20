@@ -8,11 +8,17 @@
 		<link rel="stylesheet" href="../css/base.css">
 		<link rel="stylesheet" href="../css/tomorrow-night.css">
 		<link rel="stylesheet" href="../css/codemirror.css">
+		<link rel="stylesheet" href="../css/firechat.min.css">
 		<link rel="stylesheet" href="../css/firepad.css">
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
 		<div id="app">
+			<!-- PROFILE SCREEN -->
+			<div id="profile" data-bind="visible: isProfileVisible(), with: VM.profile" style="display: none">
+				<h1>profile</h1>
+			</div>
+
 			<!-- CODING SCREEN -->
 			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code" style="display: none">
 				<div id="firepad-container"></div>
@@ -21,6 +27,7 @@
 						<span id="navi-header-text">Navi</span>
 						<span id="navi-header-profile">Amit B.</span>
 					</div>
+					<div id="firechat-container"></div>
 				</div>
 				<div id="code-bottom-bar">
 					<div id="code-tests">
@@ -31,13 +38,14 @@
 						<button id="submit-button" data-bind="click: runTests">Submit</button>
 					</div>
 					<div id="chat-input">
-						<input type="text" id="chat-input-box">
+						<input type="text" id="chat-input-box" data-bind="event: {change: sendMessage}">
 					</div>
 				</div>
 			</div>
 
 			<!-- CHOOSE SCREEN -->
 			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose" style="display: none">
+				<div class="top-bar"></div>
 				<h2 class="center-title console-text">
 					<span data-bind="text: title.text"></span>
 					<span class="cursor-holder">
@@ -71,15 +79,16 @@
 		<script src="../js/codemirror.js"></script>
 		<script src="../js/codemirror-js.js"></script>
 		<script src="../js/firepad.min.js"></script>
+		<script src="../js/firechat.min.js"></script>
 
 		<!-- Models -->
 		<script src="../js/model.screentype.js"></script>
 		<script src="../js/model.mode.js"></script>
 		<script src="../js/model.blinker.js"></script>
 		<script src="../js/model.typer.js"></script>
-		<script src="../js/model.problembank.js"></script>
 		<script src="../js/model.facebook.js"></script>
 		<script src="../js/model.firepad.js"></script>
+		<script src="../js/model.firechat.js"></script>
 		<script src="../js/model.test.js"></script>
 		<script src="../js/model.tester.js"></script>
 		<script src="../js/model.problem.js"></script>
@@ -87,6 +96,7 @@
 		<!-- View Models -->
 		<script src="../js/viewmodel.code.js"></script>
 		<script src="../js/viewmodel.choose.js"></script>
+		<script src="../js/viewmodel.profile.js"></script>
 		<script src="../js/viewmodel.login.js"></script>
 		<script src="../js/viewmodel.app.js"></script>
 

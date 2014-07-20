@@ -1,7 +1,8 @@
 function CodeViewModel() {
 	var self = this;
 	var firePad = null;
-	var problemBank = new ProblemBank();
+	var facebook = new Facebook();
+	var fireChat = null;
 
 	var setUpFirePad = function(done, problem) {
 		// TODO: Problem will be a Problem object
@@ -11,21 +12,24 @@ function CodeViewModel() {
 		});
 	};
 
-	var setUpFriend = function(done) {
-		// TODO
-		problemBank.getRandomProblem(function(problem) {
-			self.tester.setTests(problem.tests);
-			done(problem);
+	var setUpFireChat = function(done) {
+		fireChat = new FireChat(function() {
+			done();
 		});
 	};
 
-	var setUpRandom = function(done) {
+	var setUpFriend = function(game, done) {
 		// TODO
-		problemBank.getRandomProblem(function(problem) {
-			console.log(problem);
-			self.tester.setTests(problem.tests);
-			done(problem);
-		});
+		var problem = new Problem(game.problem);
+		self.tester.setTests(problem.tests);
+		done(problem);
+	};
+
+	var setUpRandom = function(game, done) {
+		// TODO
+		var problem = new Problem(game.problem);
+		self.tester.setTests(problem.tests);
+		done(problem);
 	};
 
 	self.currentProblem = new ko.observable();
@@ -42,17 +46,23 @@ function CodeViewModel() {
 		firePad.setCode(problem.starterCode);
 	};
 
-	self.onSwitchTo = function(done, mode) {
-		if (mode.type == MODE.FRIENDS) {
-			setUpFriend(function(problem) {
+	self.onSwitchTo = function(done, info) {
+		if (info.type == MODE.FRIENDS) {
+			setUpFriend(info.game, function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
-		} else if (mode.type == MODE.RANDOM) {
-			setUpRandom(function(problem) {
+		} else if (info.type == MODE.RANDOM) {
+			setUpRandom(info.game, function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
 		} else {
 			throw {name: 'FatalError', message: 'Unsupport mode'};
 		}
 	};
+
+	self.sendMessage = function(model, event) {
+		event.currentTarget.value = '';
+	}
 }
