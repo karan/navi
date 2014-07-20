@@ -109,7 +109,7 @@ exports.startSession = function(req, res) {
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
           // DEBUG
-          randProblem = {'problem': 'abc', 'id': '123'};
+          // randProblem = {'problem': 'abc', 'id': '123'};
           // DEBUG
           processAndServePs(req.user, friends, randProblem, function(ps) {
             console.log("in cb = " + ps);
@@ -126,7 +126,7 @@ exports.startSession = function(req, res) {
       console.log("users =  " + users.length);
       nextRandomProblem(function(randProblem) {
         // DEBUG
-        randProblem = {'problem': 'abc', 'id': '123'};
+        // randProblem = {'problem': 'abc', 'id': '123'};
         // DEBUG
         processAndServePs(req.user, users, randProblem, function(ps) {
           return res.send(ps);
