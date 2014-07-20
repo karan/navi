@@ -2,7 +2,7 @@ function CodeViewModel() {
 	var self = this;
 	var firePad = null;
 	var facebook = new Facebook();
-	var fireChat = null;
+	self.fireChat = null;
 
 	var setUpFirePad = function(done, roomId, problem) {
 		// TODO: Problem will be a Problem object
@@ -12,8 +12,8 @@ function CodeViewModel() {
 		});
 	};
 
-	var setUpFireChat = function(done) {
-		fireChat = new FireChat(function() {
+	var setUpFireChat = function(done, info) {
+		self.fireChat = new FireChat(info, function() {
 			$('#code').slideDown('slow');
 			done();
 		});
@@ -50,12 +50,12 @@ function CodeViewModel() {
 		if (info.type == MODE.FRIENDS) {
 			setUpFriend(info.game, function(problem) {
 				setUpFirePad(done, info.game.problemsession, problem);
-				setUpFireChat(done);
+				setUpFireChat(done, info);
 			});
 		} else if (info.type == MODE.RANDOM) {
 			setUpRandom(info.game, function(problem) {
 				setUpFirePad(done, info.game.problemsession, problem);
-				setUpFireChat(done);
+				setUpFireChat(done, info);
 			});
 		} else {
 			throw {name: 'FatalError', message: 'Unsupport mode'};
@@ -63,6 +63,7 @@ function CodeViewModel() {
 	};
 
 	self.sendMessage = function(model, event) {
+		self.fireChat.sendMessage(event.currentTarget.value);
 		event.currentTarget.value = '';
 	}
 }
