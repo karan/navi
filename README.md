@@ -51,3 +51,13 @@ Returns:
   'users': [req.user, thisFriend],  // user objects
   'problemsession': newPS._id  // a UUID
 }
+
+#### Finalize a session (to be called after all tests pass)
+
+POST `/finalize_session`
+
+POST body:
+
+`user_solution`: solution code
+`score`: int of the score
+`problem_session`: id of the problem session return when `/start` called.
