@@ -4,7 +4,7 @@ var Constants = {
   Facebook: {
     APPID : '1509254722644581',
     SECRET : 'dffc86bf60fe9f0f2e91fdc4f4f0986c',
-    CALLBACK : 'http://navi.ngrok.com/auth/facebook/callback'
+    CALLBACK : 'http://gonavi.me/auth/facebook/callback'
   },
 }
 
