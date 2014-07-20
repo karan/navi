@@ -77,6 +77,7 @@ io.sockets.on('connection', function (socket) {
     socket.join(room);
     User.findById(room, function(err, u) {
       socket.user = u;
+      routes.setOnline(u._id, true);
     });
   });
 
