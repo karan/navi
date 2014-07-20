@@ -101,6 +101,12 @@ function CodeViewModel() {
 		app.getSocket().on('runMyTests', self.onRunTests);
 	};
 
+	self.onClickBack = function() {
+		facebook.finalizeSession(tester.getUserCode(), tester.testsPassed,  roomId, function() {
+			app.setScreen(SCREEN_TYPE.CHOOSE);
+		});
+	};
+
 
 	self.onRunTests = function() {
 		console.log("RUNNING TESTS FROM OTHER");

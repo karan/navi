@@ -17,6 +17,7 @@ function Tester() {
 	};
 
 	self.tests = new ko.observableArray([]);
+	self.testsPassed = 0;
 
 	self.setTests = function(newTests) {
 		console.log("SETTING TESTS CLIENT SIDE");
@@ -34,6 +35,7 @@ function Tester() {
 		console.log("RUNNING TESTS CLIENT SIDE");
 		if (self.tests() && code) {
 			var allPassed = true;
+			self.testsPassed = 0;
 			for(var i = 0; i < self.tests().length; i++) {
 				var pass = false;
 				var result = null;
@@ -46,6 +48,9 @@ function Tester() {
 				}
 				allPassed = allPassed && pass;
 				self.tests()[i].fails(!pass);
+				if (pass) {
+					self.testsPassed++;
+				}
 			}
 			if (callback) {
 				callback(allPassed);

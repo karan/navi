@@ -19,10 +19,11 @@ function ChooseViewModel() {
 	};
 
 	self.onConnectedToGameSession = function(game, mode) {
-	  console.log("CONNECTED TO GAME SESSION");
-    console.log("I'm the other client " + app.getSocket());
-    console.log(game);
-    app.setScreen(SCREEN_TYPE.CODE, {'type' : mode, 'game' : game});
+		console.log("CONNECTED TO GAME SESSION");
+		console.log("I'm the other client " + app.getSocket());
+		console.log(game);
+		cursor.stop();
+		app.setScreen(SCREEN_TYPE.CODE, {'type' : mode, 'game' : game});
 	};
 
 	self.onClickRandom = function() {
@@ -38,6 +39,7 @@ function ChooseViewModel() {
 	};
 
 	self.onClickFriends = function() {
+		cursor.stop();
 		self.isShowingChoices(false);
 		self.title.write('Checking friends online now...', 50);
 		facebook.connectToFriend(function(game) {
@@ -48,7 +50,6 @@ function ChooseViewModel() {
 				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
 			} else {
 				self.title.write('Sorry, no friends online', 50, function() {
-					cursor.stop();
 					self.onSwitchTo();
 				});
 			}
