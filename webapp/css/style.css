@@ -33,6 +33,23 @@ html, body {
   height: 92%;
   background-color: #272C3D;
   float: left;
+  overflow: scroll;
+}
+
+.chat-name-one {
+  margin-right: 10px;
+  color: #76CC14;
+}
+
+.chat-name-two {
+  margin-right: 10px;
+  color: #FF4B19;
+}
+
+.chat-message {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  padding-left: 15px;
+  margin: 8px 0;
 }
 
 #navi-header {
@@ -70,7 +87,7 @@ html, body {
   float: right;
   border-radius: 5px;
   background-color: #272C3D;
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 #chat-input {
