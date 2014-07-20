@@ -72,13 +72,19 @@ var clients = {};
 
 io.sockets.on('connection', function (socket) {
 
+  socket.on('joinRoom', function(room) {
+    console.log("connecting to room " + room);
+    socket.join(room);
+  });
+
+
   // Sets up the user data
   socket.on('sessionConnected', function (game) {
-    console.log("connecting to other person " + game.problemsession);
+    console.log("connecting to other person " + JSON.stringify(game));
     ProblemSession.findById(game.problemsession, function(err, ps) {
       if (!ps.connected) {
-        console.log("emit to client");
-        socket.broadcast.emit('connectOther', game);
+        console.log("emit to other client");
+        io.sockets.in(ps.user2).emit('connectToGame', game);
       }
     });
   });
