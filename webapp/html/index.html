@@ -12,6 +12,7 @@
 	</head>
 	<body>
 		<div id="app">
+			<div id="flash-message" style="display:none"></div>
 			<!-- PROFILE SCREEN -->
 			<div id="profile" data-bind="visible: isProfileVisible(), with: VM.profile" style="display: none">
 				<div class="top-bar">
@@ -28,6 +29,7 @@
 					</span>
 				</h2>
 				<h3 class="center-subtitle console-text" data-bind="text: points.text"></h3>
+				<h3 class="center-subtitle console-text" data-bind="text: solved.text"></h3>
 			</div>
 
 			<!-- CODING SCREEN -->
@@ -103,6 +105,7 @@
 		<script src="../js/model.screentype.js"></script>
 		<script src="../js/model.mode.js"></script>
 		<script src="../js/model.blinker.js"></script>
+		<script src="../js/model.flashmessage.js"></script>
 		<script src="../js/model.typer.js"></script>
 		<script src="../js/model.facebook.js"></script>
 		<script src="../js/model.firepad.js"></script>
