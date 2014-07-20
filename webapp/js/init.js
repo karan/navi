@@ -20,12 +20,6 @@ socket.on('connect', function(){
   socket.on('event', function(data){});
   socket.on('disconnect', function(){});
 
-  socket.on('connectOther', function(game) {
-    console.log("connected");
-    console.log(socket);
-    console.log(game);
-  });
-
   socket.on('connectToGame', function(game) {
     console.log("I'm the other client " + socket);
     console.log("connecting to game session ");
