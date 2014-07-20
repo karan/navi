@@ -5,8 +5,8 @@ function FireChat(roomId, info, callbackVM) {
     self.firechat.sendMessage(self.roomRoomId, message);
   };
 
-  self.isPlayerOne = function() {
-    return info.game.users[0].fbId === app.getUser().fbId;
+  self.isPlayerOne = function(name) {
+    return info.game.users[0].name === name;
   };
 
   var ref = new Firebase('navi-chat.firebaseIO.com/room/' + roomId);
@@ -14,8 +14,9 @@ function FireChat(roomId, info, callbackVM) {
   firechat = self.firechat;
 
   self.firechat.on('message-add', function(r, event) {
+    console.log(event);
     var name = $('<span/>', {
-      class: self.isPlayerOne() ? 'chat-name-one' : 'chat-name-two',
+      class: self.isPlayerOne(event.name) ? 'chat-name-one' : 'chat-name-two',
       text: event.name + ':'
     });
     var message = $('<div/>', {
