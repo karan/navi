@@ -54,14 +54,14 @@ function nextRandomProblem(callback) {
 }
 
 
-function processAndServePs(reqUser, res, friends, randProblem) {
+function processAndServePs(reqUser, friends, randProblem, callback) {
   for (var i = 0; i < friends.length; i++) {
     var thisFriend = friends[i];
-    User.findOne({fbId: thisFriend.fbId}, function(err, thisFriend) {
-      if (thisFriend) {
-        ProblemSession.find({ $or:[ 
-            {problem: randProblem.problem, user1: reqUser._id, user2: thisFriend._id}, 
-            {problem: randProblem.problem, user1: thisFriend._id, user2: reqUser._id}
+//    User.findOne({fbId: thisFriend.fbId}, function(err, thisFriend) {
+      // if (thisFriend) {
+        ProblemSession.findOne({ $or:[ 
+            {problem: randProblem._id, user1: reqUser._id, user2: thisFriend._id}, 
+            {problem: randProblem._id, user1: thisFriend._id, user2: reqUser._id}
           ]}, function(err, ps) {
             // ps is the problem session where both users solved this problem
             if (!ps) {
@@ -70,18 +70,17 @@ function processAndServePs(reqUser, res, friends, randProblem) {
                 user1: reqUser._id,
                 user2: thisFriend._id
               }).save(function(err, newPS) {
-                return res.send({
-                  'problem': randProblem,
-                  'users': [reqUser, thisFriend],
-                  'problemsession': newPS._id
-                });
+                console.log("new ps found = " + newPS);
+
+                return callback({'problem': randProblem,
+                          'users': [reqUser, thisFriend],
+                          'problemsession': newPS._id});
               });
             }
         });
-      }
-    });
+      // }
+    // });
   }
-  return res.send({});  // no user to match with
 }
 
 
@@ -95,7 +94,15 @@ exports.startSession = function(req, res) {
         // friends are users who are signed up, online and friends
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
-          return processAndServePs(req.user, res, friends, randProblem);
+          randProblem = {'problem': 'abc', '_id': '123'};
+          processAndServePs(req.user, friends, randProblem, function(ps) {
+            if (ps) {
+              console.log("callback called");
+              return res.send(ps);
+            } else {
+              return res.send({});
+            }
+          });
         });
       });
     });
@@ -105,7 +112,14 @@ exports.startSession = function(req, res) {
     User.find({}, function(err, users) {
       console.log("user; " + users.length);
       nextRandomProblem(function(randProblem) {
-        return processAndServePs(req.user, res, users, randProblem);
+        processAndServePs(req.user, users, randProblem, function(ps) {
+          if (ps) {
+            console.log("callback called");
+            return res.send(ps);
+          } else {
+            return res.send({});
+          }
+        });
       });
     });
 
