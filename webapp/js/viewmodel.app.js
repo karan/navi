@@ -38,6 +38,10 @@ function AppViewModel(facebookUser) {
 		return user;
 	};
 
+	self.getProfilePictureSrc = function() {
+		return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large';
+	};
+
 	self.isCodeVisible = function() {
 		return self.currentScreen() == SCREEN_TYPE.CODE;
 	};
