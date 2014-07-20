@@ -25,19 +25,21 @@ body {
 }
 
 .center-logo {
-	width: 450px;
-	margin: 0 auto;
+	width: 350px;
+	margin: 0 auto 50px;
 	display: block;
 	margin-top: 200px;
 }
 
 .tagline {
-	width: 495px;
+	width: 595px;
 	display: block;
-	margin: 0 auto;
+	margin: 50px auto;
 	font-weight: bold;
 	margin-top: 20px;
-	font-size: 1.15em;
+	font-size: 2.15em;
+	text-align: center;
+	line-height: 50px;
 }
 
 .fb-button {
