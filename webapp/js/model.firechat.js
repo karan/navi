@@ -36,7 +36,7 @@ function FireChat(roomId, info, callbackVM) {
           });
         } else {
           firechat.getRoomList(function(r) {
-            firechat.joinRoom(r);
+            firechat.enterRoom(r.id);
           });
         }
       });
