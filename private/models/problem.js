@@ -15,7 +15,7 @@ var problemSchema = new Schema({
   description: String,
   title: String,
   starterCode: String,
-  tests: [Object],  // list of {"code" : "square(3);", "expected" : 9}
+  tests: Object,  // list of {"code" : "square(3);", "expected" : 9}
   solution: String
 });
 
