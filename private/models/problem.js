@@ -12,8 +12,9 @@ var problemSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  problem: String,
-  tests: [Object]  // list of {input: '', output: ''}
+  description: String,
+  starterCode: String,
+  tests: [Object]  // list of {"code" : "square(3);", "expected" : 9}
 });
 
 

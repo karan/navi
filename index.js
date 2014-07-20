@@ -44,7 +44,7 @@ app.configure(function(){
 // Routes
 //
 
-// GET
+// auth
 app.get('/', routes.index);
 app.get('/auth/facebook', passport.authenticate("facebook", {scope: ['email', 'user_friends']}));
 app.get('/auth/facebook/callback',
@@ -52,12 +52,13 @@ app.get('/auth/facebook/callback',
   routes.authSuccess);
 app.get('/auth/error', routes.authError);
 
-app.get('/user', routes.getUser);
-app.get('/problem', routes.getProblem);
-app.get('/start', auth.requiresLogin, routes.startSession);
-app.get('/leaderboard', routes.leaderboard);
+// user
+app.get('/user', routes.getUser);  // get logged in user
 
-// POST
+// session
+// start a session
+app.get('/start', auth.requiresLogin, routes.startSession);
+// end a session
 app.post('/finalize_session', auth.requiresLogin, routes.finalizeSession);
 
 
