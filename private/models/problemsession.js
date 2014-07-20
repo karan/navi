@@ -15,7 +15,8 @@ var problemSessionSchema = new Schema({
   problem: String,  // object id of problem
   user1: String,  // object id of user
   user2: String,
-  user_solution: String
+  user_solution: String,
+  connected: Boolean  // whether or not the users are connected
 });
 
 

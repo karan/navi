@@ -19,6 +19,7 @@ function ChooseViewModel() {
 		self.isShowingChoices(false);
 		self.title.write('Searching...', 50);
 		facebook.connectToRandom(function(game) {
+			socket.emit('sessionConnected', game);
 			self.title.write('Found! Loading...', 50);
 			app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM, 'game' : game});
 		});
@@ -29,6 +30,7 @@ function ChooseViewModel() {
 		self.title.write('Checking friends online now...', 50);
 		facebook.connectToFriend(function(game) {
 			if(game) {
+				socket.emit('sessionConnected', game);
 				self.title.write('Found! Loading...', 50);
 				app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.FRIENDS, 'game' : game});
 			} else {

@@ -64,7 +64,8 @@ function savePs(randProblem, reqUser, thisFriend, callback) {
     problem: randProblem.id,
     user1: reqUser.id,
     user2: thisFriend.id,
-    user_solution: ''
+    user_solution: '',
+    connected: false  // DEBUG: SET IT TO TRUE
   }).save(function(err, newPS) {
     callback(newPS);
   });
@@ -147,6 +148,7 @@ exports.finalizeSession = function(req, res) {
   ProblemSession.findById(psId, function(err, problemSession) {
     if (err) res.send(500);
     problemSession.user_solution = user_solution;
+    problemSession.connected = false;
     problemSession.save(function(err, ps) {
       if (err) res.send(500);
       User.findById(ps.user1, function(err, user1) {
