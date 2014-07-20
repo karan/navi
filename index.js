@@ -54,7 +54,6 @@ app.get('/auth/error', routes.authError);
 
 app.get('/user', routes.getUser);
 app.get('/start', auth.requiresLogin, routes.startSession);
-
 app.get('/leaderboard', routes.leaderboard);
 
 // POST

@@ -3,6 +3,5 @@ function Facebook() {
 
 	self.getFriendsOnline = function(callback) {
 		// TODO: implement this
-		callback([]);
 	};
 }
