@@ -94,9 +94,14 @@ io.sockets.on('connection', function (socket) {
     });
   });
 
-  socket.on('runTests', function (game) {
-    console.log(game);
-    io.sockets.in(game.user2).emit('runMyTests');
+  socket.on('runTests', function (game, id) {
+    console.log(id);
+    for (var i = 0; i < game.users.length; ++i) {
+      if (game.users[i]._id !== id) {
+        console.log("in loop: " + game.users[i]._id);
+        io.sockets.in(game.users[i]._id).emit('runMyTests');
+      }
+    }
   });
 
   socket.on('disconnect', function () {
