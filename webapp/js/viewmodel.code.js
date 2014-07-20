@@ -11,6 +11,12 @@ function CodeViewModel() {
 		});
 	};
 
+	var setUpFireChat = function(done) {
+		fireChat = new FireChat(function() {
+			done();
+		});
+	};
+
 	var setUpFriend = function(done) {
 		// TODO
 		problemBank.getRandomProblem(function(problem) {
@@ -46,10 +52,12 @@ function CodeViewModel() {
 		if (mode.type == MODE.FRIENDS) {
 			setUpFriend(function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
 		} else if (mode.type == MODE.RANDOM) {
 			setUpRandom(function(problem) {
 				setUpFirePad(done, problem);
+				setUpFireChat(done);
 			});
 		} else {
 			throw {name: 'FatalError', message: 'Unsupport mode'};
