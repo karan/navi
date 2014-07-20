@@ -30,7 +30,8 @@ var userSchema = new Schema({
   score: Number,
   badges: [String],
   friends: [],
-  online: Boolean
+  online: Boolean,
+  problems_solved: Number
 });
 
 

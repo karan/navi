@@ -162,3 +162,15 @@ body {
 .navi-back-button:hover {
 	cursor: pointer;
 }
+
+#flash-message {
+	background: #2ecc71;
+	width: 30%;
+	padding: 40px;
+	font-weight: bold;
+	text-align: center;
+	color: #2a2c2b;
+	position: absolute; top:100px;left:50%;
+	margin-left: -15%;
+	z-index: 20;
+}
