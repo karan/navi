@@ -56,42 +56,44 @@ function nextRandomProblem(callback) {
 
 function processAndServePs(reqUser, friends, randProblem, callback) {
   var ps = {};
-  var processed = false;
+  var readyToReturn = false;
 
   for (var i = 0; i < friends.length; i++) {
-    console.log("looping - " + i);
     var thisFriend = friends[i];
-//    User.findOne({fbId: thisFriend.fbId}, function(err, thisFriend) {
-      if (thisFriend.fbId !== reqUser.fbId) {
-        ProblemSession.findOne({ $or:[ 
-            {problem: randProblem._id, user1: reqUser._id, user2: thisFriend._id}, 
-            {problem: randProblem._id, user1: thisFriend._id, user2: reqUser._id}
-          ]}, function(err, ps) {
-            console.log("found ps = " + ps);
-            // ps is the problem session where both users solved this problem
-            if (!ps) {
-              new ProblemSession({
-                problem: randProblem._id,
-                user1: reqUser._id,
-                user2: thisFriend._id
-              }).save(function(err, newPS) {
-                console.log("new ps saved = " + newPS);
+    
+    console.log(thisFriend.id + " -- " + reqUser.id + ' -- ' + (thisFriend.id === reqUser.id));
 
-                ps = {'problem': randProblem,
-                      'users': [reqUser, thisFriend],
-                      'problemsession': newPS._id};
-                processed = true;
-                if (processed || i === friends.length - 1) {
-                  console.log("ending");
-                  callback(ps);
-                }
-              });
-            } else {
-              callback({});
-            }
-        });
-      }
-    // });
+    if (thisFriend.id !== reqUser.id) {
+      console.log("after if: " + thisFriend.id);
+      ProblemSession.findOne({ $or:[ 
+          {problem: randProblem.id, user1: reqUser.id, user2: thisFriend.id}, 
+          {problem: randProblem.id, user1: thisFriend.id, user2: reqUser.id}
+        ]}, function(err, ps) {
+          // ps is the problem session where both users solved this problem
+          if (!ps) {
+            readyToReturn = true;
+            new ProblemSession({
+              problem: randProblem.id,
+              user1: reqUser.id,
+              user2: thisFriend.id,
+              user_solution: ''
+            }).save(function(err, newPS) {
+              console.log("new ps saved = " + newPS);
+
+              ps = {'problem': randProblem,
+                    'users': [reqUser, thisFriend],
+                    'problemsession': newPS.id};
+              
+              if (readyToReturn || i === friends.length - 1) {
+                console.log("ending");
+                callback(ps);
+              }
+            });
+          } else {
+            callback(ps);
+          }
+      });
+    }
   }
 }
 
@@ -107,7 +109,7 @@ exports.startSession = function(req, res) {
         console.log("got friends = " + friends.length);
         nextRandomProblem(function(randProblem) {
           // DEBUG
-          randProblem = {'problem': 'abc', '_id': '123'};
+          randProblem = {'problem': 'abc', 'id': '123'};
           // DEBUG
           processAndServePs(req.user, friends, randProblem, function(ps) {
             console.log("in cb = " + ps);
@@ -123,7 +125,7 @@ exports.startSession = function(req, res) {
       console.log("user; " + users.length);
       nextRandomProblem(function(randProblem) {
         // DEBUG
-        randProblem = {'problem': 'abc', '_id': '123'};
+        randProblem = {'problem': 'abc', 'id': '123'};
         // DEBUG
         processAndServePs(req.user, users, randProblem, function(ps) {
           return res.send(ps);
@@ -136,26 +138,31 @@ exports.startSession = function(req, res) {
 }
 
 
-// submits the score for a thing
-exports.submitScore = function(req, res) {
-  var lang = req.body.lang;
-  var score = +req.body.score;
+exports.finalizeSession = function(req, res) {
+  var user_solution = req.body.user_solution;
+  var score = req.body.score;
+  var psId = req.body.problem_session;
 
-  User.findById(req.user._id, function(err, user) {
-    var newScore = user.levels[lang].scores + score;
-    if (newScore >= 200) {
-      newScore = 199;
-    }
-    req.user.levels[lang].scores = newScore;
-    req.user.levels[lang].level = Math.floor(newScore/100) + 1;
-
-    User.update({_id: req.user._id}, {$set: {levels: req.user.levels}}, 
-      function(err, newUser) {
-        console.log(req.user);
-        res.send(200, req.user)
+  ProblemSession.findById(psId, function(err, problemSession) {
+    if (err) res.send(500);
+    problemSession.user_solution = user_solution;
+    problemSession.save(function(err, ps) {
+      if (err) res.send(500);
+      User.find({'id': { $in: [ps.user1, ps.user2]}}, function(err, docs) {
+        console.log(docs);
+        if (err) res.send(500);
+        docs[0].score += score;
+        docs[1].score += score;
+        docs[0].save(function(err, u) {
+          if (err) res.send(500);
+          docs[1].save(function(err, e) {
+            if (err) res.send(500);
+            res.send(200);
+          });
+        });
       });
+    });
   });
-
 }
 
 

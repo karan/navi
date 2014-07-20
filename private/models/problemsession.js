@@ -14,7 +14,8 @@ var problemSessionSchema = new Schema({
   },
   problem: String,  // object id of problem
   user1: String,  // object id of user
-  user2: String
+  user2: String,
+  user_solution: String
 });
 
 

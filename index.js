@@ -58,7 +58,7 @@ app.get('/start', auth.requiresLogin, routes.startSession);
 app.get('/leaderboard', routes.leaderboard);
 
 // POST
-app.post('/submit_score', auth.requiresLogin, routes.submitScore);
+app.post('/finalize_session', auth.requiresLogin, routes.finalizeSession);
 
 
 require('./private/pass.js')(passport);
