@@ -74,9 +74,9 @@ function processAndServePs(reqUser, friends, randProblem, callback) {
   (function checkOne() {
     var thisFriend = friends.splice(0, 1)[0];
     if (thisFriend.id !== reqUser.id) {
-      commonPs(reqUser, thisFriend, randProblem, function(ps) {
+      // commonPs(reqUser, thisFriend, randProblem, function(ps) {
           // ps is the problem session where both users solved this problem
-          if (!ps) {
+          // if (!ps) {
             savePs(randProblem, reqUser, thisFriend, function(newPS) {
               return_struct = {'problem': randProblem,
                                'users': [reqUser, thisFriend],
@@ -88,10 +88,10 @@ function processAndServePs(reqUser, friends, randProblem, callback) {
                 checkOne();
               }
             });
-          } else {
-            callback({});
-          }
-      });
+          // } else {
+            // callback({});
+          // }
+      // });
     }
   })();
 }
