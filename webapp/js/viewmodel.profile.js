@@ -2,6 +2,7 @@ function ProfileViewModel() {
 	var self = this;
 	var cursor = new Blinker('profile-title-cursor', 500);
 	self.title = new Typer('');
+	self.points = new Typer('');
 
 
 	self.onClickProfile = function() {
@@ -14,7 +15,10 @@ function ProfileViewModel() {
 	};
 
 	self.onSwitchTo = function(done) {
-		self.title.write('User Profile', 50);
+		self.title.write(app.getUser().name, 50, function() {
+			self.points.write('Score: ' + app.getUser().score, 50);
+		});
+		console.log(app.getUser());
 		cursor.start()
 		done();
 	};
