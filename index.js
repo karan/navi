@@ -94,6 +94,11 @@ io.sockets.on('connection', function (socket) {
     });
   });
 
+  socket.on('runTests', function (game) {
+    console.log(game);
+    io.sockets.in(game.user2).emit('runMyTests');
+  });
+
   socket.on('disconnect', function () {
     var userData = socket.user;
     console.log("disconnect " + userData);
