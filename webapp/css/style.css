@@ -15,17 +15,30 @@ html, body {
   float: left;
 }
 
+#navi-header {
+  line-height: 44px;
+}
+
+#navi-header-text {
+  margin-left: 10px;
+}
+
+#navi-header-profile {
+  float: right;
+  margin-right: 10px;
+}
+
 #chat {
   width: 33.33%;
   height: 92%;
-  background-color: #1a252f;
+  background-color: #272C3D;
   float: left;
 }
 
 #navi-header {
   height: 44px;
   width: 100%;
-  background-color: green;
+  background-color: #151618;
 }
 
 #code-bottom-bar {
@@ -38,14 +51,32 @@ html, body {
 #code-tests {
   width: 66.67%;
   height: 100%;
-  background-color: blue;
+  background-color: #151618;
   float: left;
+}
+
+#submit-button {
+	margin-right: 10px;
+	padding: 10px 21px;
+	font-size: 14px;
+	line-height: 100%;
+	color: #fff;
+	display:inline-block;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	color: #fff;
+  border: none;
+  float: right;
+  border-radius: 5px;
+  background-color: #272C3D;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 #chat-input {
   width: 33.33%;
   height: 100%;
-  background-color: red;
+  background-color: #151618;
   float: left;
 }
 
@@ -56,4 +87,19 @@ html, body {
 .CodeMirror-scroll {
   overflow-y: hidden;
   overflow-x: auto;
+}
+
+#test-pass, #test-fail {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+
+#test-fail {
+  background-color: #fe6152;
+}
+
+#test-pass {
+  background-color: #1ac328;
 }

@@ -7,7 +7,7 @@ function LoginViewModel() {
 		// TODO: implement actual login
 		// 
 		cursor.stop();
-		app.setScreen(SCREEN_TYPE.CODE, {'type' : MODE.RANDOM});
+		app.setScreen(SCREEN_TYPE.CHOOSE);
 	}
 
 	self.onSwitchTo = function(done) {

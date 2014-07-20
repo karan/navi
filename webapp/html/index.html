@@ -6,7 +6,7 @@
 		<link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../css/base.css">
-		<link rel="stylesheet" href="../css/light-table.css">
+		<link rel="stylesheet" href="../css/tomorrow-night.css">
 		<link rel="stylesheet" href="../css/codemirror.css">
 		<link rel="stylesheet" href="../css/firepad.css">
 		<link rel="stylesheet" href="../css/style.css">
@@ -17,23 +17,51 @@
 			<div id="code" data-bind="visible: isCodeVisible(), with: VM.code" style="display: none">
 				<div id="firepad-container"></div>
 				<div id="chat">
-					<div id="navi-header"></div>
+					<div id="navi-header">
+						<span id="navi-header-text">Navi</span>
+						<span id="navi-header-profile">Amit B.</span>
+					</div>
 				</div>
 				<div id="code-bottom-bar">
-					<div id="code-tests"></div>
-					<div id="chat-input"></div>
+					<div id="code-tests">
+						<div id="test-fail"></div>
+						<div id="test-pass"></div>
+						<div id="test-pass"></div>
+						<div id="test-pass"></div>
+						<div id="test-fail"></div>
+						<div id="test-pass"></div>
+						<div id="test-fail"></div>
+						<button id="submit-button">Submit</button>
+					</div>
+					<div id="chat-input">
+						<input type="text" id="chat-input-box">
+					</div>
 				</div>
 			</div>
 
 			<!-- CHOOSE SCREEN -->
 			<div id="choose" data-bind="visible: isChooseVisible(), with: VM.choose" style="display: none">
-				<h1 data-bind="text: header"></h1>
+				<h2 class="center-title console-text">
+					<span data-bind="text: title.text"></span>
+					<span class="cursor-holder">
+						<span id="choose-title-cursor" style="display: none;">█</span>
+					</span>
+				</h2>
+				<div class="choice-buttons" data-bind="visible: !isShowingFriends()">
+					<div class="btn btn-purple" data-bind="click: onClickFriends">With Friend</div>
+					<div class="btn btn-yellow left-space" data-bind="click: onClickRandom">Random</div>
+				</div>
 			</div>
 
 			<!-- LOGIN SCREEN -->
 			<div id="login" data-bind="visible: isLoginVisible(), with: VM.login" style="display: none">
 				<img class="center-logo" src="../img/logo-large.png" />
-				<p class="tagline">the collaborative way to learn to code<span id="logo-cursor" style="display: none;">█</span></p>
+				<p class="tagline console-text">
+					the <span class="purple">collaborative</span> way to learn to code
+					<span class="cursor-holder">
+						<span id="logo-cursor" style="display: none;">█</span>
+					</span>
+				</p>
 				<div class="fb-button" data-bind="click: login"></div>
 			</div>
 		</div>
@@ -51,6 +79,8 @@
 		<script src="../js/model.screentype.js"></script>
 		<script src="../js/model.mode.js"></script>
 		<script src="../js/model.blinker.js"></script>
+		<script src="../js/model.typer.js"></script>
+		<script src="../js/model.facebook.js"></script>
 		<script src="../js/model.firepad.js"></script>
 		<script src="../js/model.test.js"></script>
 		<script src="../js/model.tester.js"></script>
