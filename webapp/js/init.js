@@ -1,6 +1,6 @@
-var app = new AppViewModel();
+var app = new AppViewModel(facebookUser);
 ko.applyBindings(app, document.getElementById('app'));
-if (facebookUser) {
+if (app.isAuthenticated()) {
 	app.setScreen(SCREEN_TYPE.CHOOSE);
 } else {
 	app.setScreen(SCREEN_TYPE.LOGIN);
