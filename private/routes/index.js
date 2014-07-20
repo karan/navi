@@ -71,7 +71,6 @@ function savePs(randProblem, reqUser, thisFriend, callback) {
 }
 
 function processAndServePs(reqUser, friends, randProblem, callback) {
-  console.log(randProblem);
   (function checkOne() {
     var thisFriend = friends.splice(0, 1)[0];
     if (thisFriend.id !== reqUser.id) {
