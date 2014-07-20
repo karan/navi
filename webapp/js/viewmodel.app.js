@@ -46,7 +46,7 @@ function AppViewModel(facebookUser, init) {
 
 	self.getProfilePictureSrc = function() {
 		if(self.isAuthenticated()) {
-			return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large';
+			return 'http://graph.facebook.com/' + self.getUser().fbId + '/picture?type=large&width=100&height=100';
 		}
 		return null;
 	};
