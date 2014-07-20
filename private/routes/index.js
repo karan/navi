@@ -4,6 +4,7 @@ var ProblemSession = require('./../models/problemsession');
 var Friends = require('./../helpers/friends');
 var request = require('request');
 
+
 exports.index = function (req, res){
   if (req.isAuthenticated()) {
     return res.render('index', {user: req.user});
@@ -54,47 +55,53 @@ function nextRandomProblem(callback) {
 }
 
 
+function commonPs(reqUser, thisFriend, randProblem, callback) {
+  ProblemSession.findOne({ $or:[ 
+      {problem: randProblem.id, user1: reqUser.id, user2: thisFriend.id}, 
+      {problem: randProblem.id, user1: thisFriend.id, user2: reqUser.id}
+    ]}, function(err, ps) {
+      callback(ps);
+    });
+}
+
+
+function savePs(randProblem, reqUser, thisFriend, callback) {
+  new ProblemSession({
+    problem: randProblem.id,
+    user1: reqUser.id,
+    user2: thisFriend.id,
+    user_solution: ''
+  }).save(function(err, newPS) {
+    callback(newPS);
+  });
+}
+
+
 function processAndServePs(reqUser, friends, randProblem, callback) {
-  var ps = {};
-  var readyToReturn = false;
-
-  for (var i = 0; i < friends.length; i++) {
-    var thisFriend = friends[i];
-    
-    console.log(thisFriend.id + " -- " + reqUser.id + ' -- ' + (thisFriend.id === reqUser.id));
-
+  (function checkOne() {
+    var thisFriend = friends.splice(0, 1)[0]; // get the first record of coll and reduce coll by one
     if (thisFriend.id !== reqUser.id) {
       console.log("after if: " + thisFriend.id);
-      ProblemSession.findOne({ $or:[ 
-          {problem: randProblem.id, user1: reqUser.id, user2: thisFriend.id}, 
-          {problem: randProblem.id, user1: thisFriend.id, user2: reqUser.id}
-        ]}, function(err, ps) {
+      commonPs(reqUser, thisFriend, randProblem, function(ps) {
           // ps is the problem session where both users solved this problem
           if (!ps) {
-            readyToReturn = true;
-            new ProblemSession({
-              problem: randProblem.id,
-              user1: reqUser.id,
-              user2: thisFriend.id,
-              user_solution: ''
-            }).save(function(err, newPS) {
-              console.log("new ps saved = " + newPS);
-
-              ps = {'problem': randProblem,
-                    'users': [reqUser, thisFriend],
-                    'problemsession': newPS.id};
+            savePs(randProblem, reqUser, thisFriend, function(newPS) {
+              return_struct = {'problem': randProblem,
+                               'users': [reqUser, thisFriend],
+                               'problemsession': newPS.id};
               
-              if (readyToReturn || i === friends.length - 1) {
-                console.log("ending");
-                callback(ps);
+              if (return_struct != {}) {
+                callback(return_struct);
+              } else {
+                checkOne();
               }
             });
           } else {
-            callback(ps);
+            callback({});
           }
       });
     }
-  }
+  })();
 }
 
 
