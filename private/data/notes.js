@@ -13,13 +13,13 @@ function sum (n) {
 }
 /////////////////////////////
 function sum (n) {
-  var sum = 0;
+  var total = 0;
   for (var i = 0; i < n; ++i) {
     if (i % 3 === 0 || i % 5 === 0) {
-      sum += i;
+      total += i;
     }
   }
-  return sum;
+  return total;
 }
 /////////////////////////////
 // sum(0) === 0
@@ -97,4 +97,37 @@ function isFibo (n) {
 // isFibo(9) === false
 // isFibo(89) === true
 // isFibo(90) === true
+/////////////////////////////
+
+/////////////////////////////
+// Manhattan Distance
+/////////////////////////////
+/**
+ * The Manhattan Distance between two points is defined to be the sum of the horizontal
+ * and vertical distances between two points. For example:
+ *
+ *  _ _ _o
+ * |
+ * |
+ * |
+ * o
+ *
+ * The distance between the two points above located at (0, 3) and (3, 0) is 6.
+ * manhattanDistance({ x: 0, y: 3}, { x: 3, y: 0 }) === 6
+ *
+ * Create a function that finds the manhattan distance between two points.
+ */
+function manhattanDistance (p1, p2) {
+  // body...
+}
+/////////////////////////////
+function manhattanDistance (p1, p2) {
+  return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+}
+/////////////////////////////
+// manhattanDistance({ x: 0, y: 3}, { x: 3, y: 0 }) === 6
+// manhattanDistance({ x: 0, y: 0}, { x: 3, y: 0 }) === 3
+// manhattanDistance({ x: -6, y: 3}, { x: 3, y: 9 }) === 12
+// manhattanDistance({ x: 1, y: 1}, { x: 1, y: 1 }) === 0
+// manhattanDistance({ x: 100, y: 3}, { x: 3, y: 0 }) === 100
 /////////////////////////////
