@@ -73,16 +73,16 @@ var clients = {};
 io.sockets.on('connection', function (socket) {
 
   // Sets up the user data
-  socket.on('sessionConnected', function (game) {
-    console.log("connecting to other person");
-    ProblemSession.findById(game.problemsession, function(err, ps) {
-      console.log(JSON.stringify(ps));
-      if (!ps.connected) {
-        console.log("emit to client");
-        socket.broadcast.emit('connectOther', game);
-      }
-    });
-  });
+  // socket.on('sessionConnected', function (game) {
+  //   console.log("connecting to other person");
+  //   ProblemSession.findById(game.problemsession, function(err, ps) {
+  //     console.log(JSON.stringify(ps));
+  //     if (!ps.connected) {
+  //       console.log("emit to client");
+  //       socket.broadcast.emit('connectOther', game);
+  //     }
+  //   });
+  // });
 
 });
 
