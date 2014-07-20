@@ -63,7 +63,7 @@ function CodeViewModel() {
 	self.finishedProblem = function() {
 		// TODO: Do some victory animation
 		//
-		facebook.finalizeSession(tester.getUserCode(), tester.testsPassed,  roomId, function() {
+		facebook.finalizeSession(self.tester.getUserCode(), self.tester.testsPassed,  roomId, function() {
 			$('#profile').slideDown('slow');
 			app.setScreen(SCREEN_TYPE.PROFILE);
 		});
@@ -102,7 +102,7 @@ function CodeViewModel() {
 	};
 
 	self.onClickBack = function() {
-		facebook.finalizeSession(tester.getUserCode(), tester.testsPassed,  roomId, function() {
+		facebook.finalizeSession(self.tester.getUserCode(), self.tester.testsPassed,  roomId, function() {
 			app.setScreen(SCREEN_TYPE.CHOOSE);
 		});
 	};
