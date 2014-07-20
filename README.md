@@ -42,7 +42,7 @@ Returns logged in user (see JSON above)
 
 #### Start a new session
 
-`/start?option={ friends | all }`
+`/start?option={ friend | all }`
 
 Returns:
 
