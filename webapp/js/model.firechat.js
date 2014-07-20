@@ -32,7 +32,7 @@ function FireChat(roomId, info, callbackVM) {
         if (self.isPlayerOne()) {
           firechat.createRoom('room', 'public', function(r) {
             self.roomRoomId = r;
-            firechat.enterRoom(roomRoomId);
+            firechat.enterRoom(self.roomRoomId);
           });
         } else {
           firechat.getRoomList(function(rl) {
