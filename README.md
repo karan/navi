@@ -3,6 +3,8 @@ navi
 
 Learn to code together.
 
+![navi](https://cloud.githubusercontent.com/assets/744973/3653719/32e88226-1159-11e4-90a4-28aef8bf698d.png)
+
 ## API
 
 #### Login
